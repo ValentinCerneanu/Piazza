@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "243296940973",
+    "firebase_url": "https://piazza-9fdc9.firebaseio.com",
+    "project_id": "piazza-9fdc9",
+    "storage_bucket": "piazza-9fdc9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:243296940973:android:8bdcf766148c66c2782724",
+        "android_client_info": {
+          "package_name": "com.innovation.piazza"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "243296940973-1mq0mj947igh1dvh36fcu7quvua2cr8f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBvPAijU8yV-7VwVBquEfLs65wAQQJAr9w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "243296940973-1mq0mj947igh1dvh36fcu7quvua2cr8f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
