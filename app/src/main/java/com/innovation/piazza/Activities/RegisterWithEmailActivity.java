@@ -140,12 +140,18 @@ public class RegisterWithEmailActivity extends AppCompatActivity {
                             FirebaseUser firebaseUser = mAuth.getCurrentUser();
                             UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                                     .setDisplayName(displayName).build();
-                            firebaseUser.updateProfile(profileUpdates);
+                            firebaseUser.updateProfile(profileUpdates).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        Intent nextActivity;
+                                        nextActivity = new Intent(getBaseContext(), MainActivity.class);
+                                        startActivity(nextActivity);
+                                        finish();
+                                    }
+                                }
+                            });
 
-                            Intent nextActivity;
-                            nextActivity = new Intent(getBaseContext(), MainActivity.class);
-                            startActivity(nextActivity);
-                            finish();
                             firebaseUser.sendEmailVerification()
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
