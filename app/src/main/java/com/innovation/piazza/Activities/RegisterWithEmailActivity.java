@@ -13,7 +13,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -25,6 +24,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.innovation.piazza.R;
@@ -122,7 +122,7 @@ public class RegisterWithEmailActivity extends AppCompatActivity {
                 // form field with an error.
                 focusView.requestFocus();
             } else {
-                createAccout(email, password);
+                createAccout(email, password, name);
             }
         }
         catch(Exception e){
@@ -130,7 +130,7 @@ public class RegisterWithEmailActivity extends AppCompatActivity {
         }
     }
 
-    private void createAccout(final String email, final String password) {
+    private void createAccout(final String email, final String password, final String displayName) {
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -138,6 +138,10 @@ public class RegisterWithEmailActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             FirebaseUser firebaseUser = mAuth.getCurrentUser();
+                            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                    .setDisplayName(displayName).build();
+                            firebaseUser.updateProfile(profileUpdates);
+
                             Intent nextActivity;
                             nextActivity = new Intent(getBaseContext(), MainActivity.class);
                             startActivity(nextActivity);

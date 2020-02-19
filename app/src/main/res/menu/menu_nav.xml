@@ -1,0 +1,43 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:title="Actions">
+        <menu>
+            <item
+                android:id="@+id/nav_shop_list"
+                android:icon="@drawable/ic_store"
+                android:title="Lista magazine" />
+            <item
+                android:id="@+id/nav_promos"
+                android:icon="@drawable/ic_promos"
+                android:title="Oferte" />
+            <item
+                android:id="@+id/nav_orders_history"
+                android:icon="@drawable/ic_orders_history"
+                android:title="Istoric comenzi" />
+        </menu>
+    </item>
+
+    <item
+        android:title="Policies">
+        <menu>
+            <item
+                android:id="@+id/nav_return_policy"
+                android:icon="@drawable/ic_policies"
+                android:title="Politica retur" />
+
+            <item
+                android:id="@+id/nav_cookie_policy"
+                android:icon="@drawable/ic_policies"
+                android:title="Politica cookies" />
+        </menu>
+    </item>
+
+    <item android:title="My Account">
+        <menu>
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@drawable/common_full_open_on_phone"
+                android:title="Logout" />
+        </menu>
+    </item>
+</menu>
