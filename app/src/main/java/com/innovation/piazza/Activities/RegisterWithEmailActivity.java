@@ -195,7 +195,7 @@ public class RegisterWithEmailActivity extends AppCompatActivity {
     }
 
     private boolean isPasswordValid(String password) {
-        return password.length() > 4;
+        return password.length() > 5;
     }
 
     public void goBackToLogin(View v){
