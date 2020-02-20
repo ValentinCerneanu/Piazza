@@ -41,6 +41,10 @@
             android:screenOrientation="portrait">
         </activity>
 
+        <activity android:name=".Activities.Tutorial.ScreenSlidePagerActivity"
+            android:screenOrientation="portrait">
+        </activity>
+
     </application>
 
 </manifest>

@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.innovation.piazza.Activities.Tutorial.ScreenSlidePagerActivity;
 import com.innovation.piazza.R;
 
 public class SplashActivity extends AppCompatActivity {
@@ -34,7 +35,7 @@ public class SplashActivity extends AppCompatActivity {
                     startActivity(nextActivity);
                 } else {
                     // No user is signed in
-                    nextActivity = new Intent(getBaseContext(), SignInMethodActivity.class);
+                    nextActivity = new Intent(getBaseContext(), ScreenSlidePagerActivity.class);
                     startActivity(nextActivity);
                 }
                 finish();
