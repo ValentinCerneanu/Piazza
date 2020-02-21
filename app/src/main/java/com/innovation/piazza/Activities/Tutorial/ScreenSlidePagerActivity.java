@@ -33,6 +33,28 @@ public class ScreenSlidePagerActivity extends FragmentActivity {
         final Button previous = (Button) findViewById(R.id.previous_slide);
         previous.setVisibility(View.INVISIBLE);
 
+        mPager.addOnPageChangeListener(
+                new ViewPager.OnPageChangeListener() {
+                    @Override
+                    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                        if(mPager.getCurrentItem() > 0)
+                            previous.setVisibility(View.VISIBLE);
+                        else
+                            previous.setVisibility(View.INVISIBLE);
+                    }
+
+                    @Override
+                    public void onPageSelected(int position) {
+                            
+                    }
+
+                    @Override
+                    public void onPageScrollStateChanged(int state) {
+
+                    }
+                }
+        );
+
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,8 +73,9 @@ public class ScreenSlidePagerActivity extends FragmentActivity {
         previous.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(mPager.getCurrentItem() == 1)
+                if(mPager.getCurrentItem() == 1) {
                     v.setVisibility(View.INVISIBLE);
+                }
                 mPager.setCurrentItem(mPager.getCurrentItem() - 1);
             }
         });
