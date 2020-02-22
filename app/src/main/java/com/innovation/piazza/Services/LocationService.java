@@ -19,12 +19,10 @@ public class LocationService {
     }
 
     public void getAddressByLocation() {
-        if(locationTracker.getLocation() != null) {
-            try {
-                addresses = geocoder.getFromLocation(locationTracker.getLatitude(), locationTracker.getLongitude(), 1).get(0);
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
+        try {
+            addresses = geocoder.getFromLocation(locationTracker.getLatitude(), locationTracker.getLongitude(), 1).get(0);
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
     }
 

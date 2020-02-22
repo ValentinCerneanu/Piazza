@@ -67,7 +67,7 @@ public class LocationTracker implements LocationListener {
                                 Manifest.permission.ACCESS_FINE_LOCATION,
                                 Manifest.permission.ACCESS_COARSE_LOCATION},
                                 LocationService.LOCATION_PERMISSION_CODE);
-                        return null;
+                        return new Location("null");
                     }
                     locationManager.requestLocationUpdates(
                             LocationManager.GPS_PROVIDER,
