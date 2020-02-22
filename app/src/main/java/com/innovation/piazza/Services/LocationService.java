@@ -38,4 +38,7 @@ public class LocationService {
         }
 
     }
+    public String getAddressLine(){
+        return addresses.get(0).getAddressLine(0);
+    }
 }

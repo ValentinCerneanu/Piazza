@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         saveLocalData();
         setupToolbarAndDrawer();
 
@@ -37,6 +39,9 @@ public class MainActivity extends AppCompatActivity {
     private void getAddress(){
         LocationService locationService = new LocationService(getApplicationContext());
         locationService.getAddressByLocation();
+        EditText editText = (EditText)findViewById(R.id.calculatedLocation);
+        editText.setText( locationService.getAddressLine() , TextView.BufferType.EDITABLE);
+
     }
 
     private void saveLocalData() {

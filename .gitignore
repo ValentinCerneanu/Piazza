@@ -82,3 +82,8 @@ lint/outputs/
 lint/tmp/
 # lint/reports/
 .idea/codeStyles/Project.xml
+gradle.properties
+gradle.properties
+gradle.properties
+gradle/wrapper/gradle-wrapper.properties
+build.gradle
