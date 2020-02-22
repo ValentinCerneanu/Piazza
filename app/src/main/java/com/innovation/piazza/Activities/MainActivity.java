@@ -16,6 +16,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.innovation.piazza.R;
+import com.innovation.piazza.Services.LocationService;
 
 public class MainActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
@@ -29,6 +30,13 @@ public class MainActivity extends AppCompatActivity {
 
         saveLocalData();
         setupToolbarAndDrawer();
+
+        getAddress();
+    }
+
+    private void getAddress(){
+        LocationService locationService = new LocationService(getApplicationContext());
+        locationService.getAddressByLocation();
     }
 
     private void saveLocalData() {
