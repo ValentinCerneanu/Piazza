@@ -17,8 +17,4 @@
     <string name="welcomeString">Welcome</string>
     <string name="logoString">SafeChat</string>
     <string name="appLoadingString">App loading...</string>
-    <string name="daca_se_aplica_completati_si_urmatoarele_campuri">Daca se aplica, completati si urmatoarele campuri:</string>
-    <string name="bloc">Bloc</string>
-    <string name="apartament">Apartament</string>
-    <string name="scara">Scara</string>
 </resources>
