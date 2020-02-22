@@ -1,34 +1,31 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:layout_height="match_parent" >
 
     <androidx.viewpager.widget.ViewPager
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/pager"
         android:layout_width="match_parent"
-        android:layout_height="500dp" />
+        android:layout_height="match_parent" />
 
-    <LinearLayout
+    <RelativeLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/pager"
-        android:layout_alignParentEnd="true"
-        android:layout_centerInParent="true">
+        android:layout_alignParentBottom="true">
 
         <Button
             android:id="@+id/previous_slide"
             android:text="Previous"
             android:layout_width="wrap_content"
-            android:layout_height="60dp" />
+            android:layout_height="60dp"
+            android:layout_toLeftOf="@+id/next_slide" />
 
         <Button
             android:id="@+id/next_slide"
             android:text="Next"
             android:layout_width="wrap_content"
-            android:layout_height="60dp" />
-    </LinearLayout>
-
+            android:layout_height="60dp"
+            android:layout_alignParentEnd="true"/>
+    </RelativeLayout>
 </RelativeLayout>

@@ -55,10 +55,7 @@ public class ScreenSlidePagerActivity extends FragmentActivity {
             @Override
             public void onClick(View v) {
                 if(mPager.getCurrentItem() == NUM_PAGES - 1) {
-                    Intent nextActivity;
-                    nextActivity = new Intent(getBaseContext(), SignInMethodActivity.class);
-                    startActivity(nextActivity);
-                    finishAffinity();
+                    goToSignInMethodActivity();
                 } else {
                     mPager.setCurrentItem(mPager.getCurrentItem() + 1);
                     previous.setVisibility(View.VISIBLE);
@@ -74,6 +71,13 @@ public class ScreenSlidePagerActivity extends FragmentActivity {
                 mPager.setCurrentItem(mPager.getCurrentItem() - 1);
             }
         });
+    }
+
+    private void goToSignInMethodActivity() {
+        Intent nextActivity;
+        nextActivity = new Intent(getBaseContext(), SignInMethodActivity.class);
+        startActivity(nextActivity);
+        finishAffinity();
     }
 
     @Override
