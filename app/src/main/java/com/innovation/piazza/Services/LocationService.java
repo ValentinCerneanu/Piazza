@@ -4,10 +4,10 @@ import android.content.Context;
 import android.location.Address;
 import android.location.Geocoder;
 
-import java.util.List;
 import java.util.Locale;
 
 public class LocationService {
+    public static final int LOCATION_PERMISSION_CODE = 1;
 
     private LocationTracker locationTracker;
     private Geocoder geocoder;
@@ -19,12 +19,12 @@ public class LocationService {
     }
 
     public void getAddressByLocation() {
-        locationTracker.getLocation();
-
-        try {
-            addresses = geocoder.getFromLocation(locationTracker.getLatitude(), locationTracker.getLongitude(), 1).get(0);
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        if(locationTracker.getLocation() != null) {
+            try {
+                addresses = geocoder.getFromLocation(locationTracker.getLatitude(), locationTracker.getLongitude(), 1).get(0);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
         }
     }
 
@@ -33,6 +33,8 @@ public class LocationService {
     }
 
     public String getAddressLine() {
-        return addresses.getAddressLine(0);
+        if(addresses != null)
+            return addresses.getAddressLine(0);
+        return new String();
     }
 }

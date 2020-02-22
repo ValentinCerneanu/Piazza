@@ -2,6 +2,7 @@ package com.innovation.piazza.Activities;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MenuItem;
@@ -9,20 +10,38 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.gson.Gson;
 import com.innovation.piazza.R;
 import com.innovation.piazza.Services.LocationService;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.Iterator;
 
 public class MainActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private ImageButton burgerBtn;
+
+    private FirebaseDatabase database;
+    private DatabaseReference myRefToDatabase;
+
+    private JSONObject stores = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,13 +52,47 @@ public class MainActivity extends AppCompatActivity {
         setupToolbarAndDrawer();
 
         getAddress();
+
+        getStores();
+    }
+
+    private void getStores() {
+        database = FirebaseDatabase.getInstance();
+        myRefToDatabase = database.getReference("Stores");
+        myRefToDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()){
+                    Gson gson = new Gson();
+                    String gsonString = gson.toJson(dataSnapshot.getValue());
+                    try {
+                        stores = new JSONObject(gsonString);
+                        Iterator<String> iterator = stores.keys();
+                        while (iterator.hasNext()) {
+                            String key = iterator.next();
+                            try {
+                                JSONObject store = new JSONObject(stores.get(key).toString());
+                            } catch (JSONException e) {
+                                // Something went wrong!
+                            }
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
     }
 
     private void getAddress(){
-        LocationService locationService = new LocationService(getApplicationContext());
+        LocationService locationService = new LocationService(this);
         locationService.getAddressByLocation();
-        EditText editText = (EditText)findViewById(R.id.calculatedLocation);
-        editText.setText( locationService.getAddressLine() , TextView.BufferType.EDITABLE);
+        EditText editText = (EditText) findViewById(R.id.calculatedLocation);
+        editText.setText(locationService.getAddressLine() , TextView.BufferType.EDITABLE);
     }
 
     private void saveLocalData() {
@@ -128,5 +181,21 @@ public class MainActivity extends AppCompatActivity {
                 drawerLayout .openDrawer(Gravity.LEFT);
             }
         });
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults)
+    {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == LocationService.LOCATION_PERMISSION_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(MainActivity.this,"Location Permission Granted", Toast.LENGTH_SHORT).show();
+                getAddress();
+            }
+            else {
+                //denied
+            }
+        }
     }
 }

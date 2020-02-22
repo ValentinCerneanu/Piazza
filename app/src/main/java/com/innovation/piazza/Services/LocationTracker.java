@@ -1,6 +1,7 @@
 package com.innovation.piazza.Services;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -61,14 +62,12 @@ public class LocationTracker implements LocationListener {
                     location = null;
                     if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
                             ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                        // TODO: Consider calling
-                        //    ActivityCompat#requestPermissions
-                        // here to request the missing permissions, and then overriding
-                        //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                        //                                          int[] grantResults)
-                        // to handle the case where the user grants the permission. See the documentation
-                        // for ActivityCompat#requestPermissions for more details.
-                        return new Location("null");
+                        ActivityCompat.requestPermissions((Activity) mContext,
+                                new String[] {
+                                Manifest.permission.ACCESS_FINE_LOCATION,
+                                Manifest.permission.ACCESS_COARSE_LOCATION},
+                                LocationService.LOCATION_PERMISSION_CODE);
+                        return null;
                     }
                     locationManager.requestLocationUpdates(
                             LocationManager.GPS_PROVIDER,
@@ -132,19 +131,10 @@ public class LocationTracker implements LocationListener {
         return longitude;
     }
 
-    /**
-     * Function to check GPS/wifi enabled
-     *
-     * @return boolean
-     */
     public boolean canGetLocation() {
         return this.canGetLocation;
     }
 
-    /**
-     * Function to show settings alert dialog On pressing Settings button will
-     * lauch Settings Options
-     */
     public void showSettingsAlert() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(mContext);
 
