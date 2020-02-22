@@ -18,7 +18,7 @@ public class LocationService {
         locationTracker = new LocationTracker(context);
     }
 
-    public void getAddressByLocation() {
+    public void getAddressByLocation() {      
         try {
             addresses = geocoder.getFromLocation(locationTracker.getLatitude(), locationTracker.getLongitude(), 1).get(0);
         } catch (Exception ex) {
