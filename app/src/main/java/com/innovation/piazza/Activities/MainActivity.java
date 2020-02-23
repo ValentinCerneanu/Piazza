@@ -30,6 +30,7 @@ import com.google.gson.Gson;
 import com.innovation.piazza.Adapters.StoreAdapter;
 import com.innovation.piazza.Domain.StoreModel;
 import com.innovation.piazza.R;
+import com.innovation.piazza.Services.FirebaseCommunication;
 import com.innovation.piazza.Services.LocationService;
 
 import org.json.JSONException;
@@ -96,12 +97,15 @@ public class MainActivity extends AppCompatActivity {
                             String key = iterator.next();
                             try {
                                 JSONObject storeJson = new JSONObject(stores.get(key).toString());
-                                StoreModel store = new StoreModel(  stores.get(key).toString(),
+                                StoreModel store = new StoreModel(  key,
                                                                     storeJson.getString("name"),
                                                                     storeJson.getString("address"),
                                                                     storeJson.getString("logo_url"),
                                                                     storeJson.getString("latitude"),
-                                                                    storeJson.getString("longitude"));
+                                                                    storeJson.getString("longitude"),
+                                                                    storeAdapter);
+                                FirebaseCommunication firebaseCommunication = new FirebaseCommunication();
+                                firebaseCommunication.getImage(storeJson.getString("logo_url"), store);
                                 storeModels.add(store);
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -119,6 +123,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+
 
     private void getAddress(){
         LocationService locationService = new LocationService(this);

@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.innovation.piazza.Domain.StoreModel;
 import com.innovation.piazza.R;
+
 import java.util.ArrayList;
 
 public class StoreAdapter extends ArrayAdapter<StoreModel> implements ListAdapter {
@@ -37,12 +38,11 @@ public class StoreAdapter extends ArrayAdapter<StoreModel> implements ListAdapte
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         StoreModel dataModel = getItem(position);
-        ViewHolder viewHolder;
+        final ViewHolder viewHolder;
 
         final View result;
 
         if(convertView == null) {
-
             viewHolder = new ViewHolder();
             LayoutInflater inflater = LayoutInflater.from(getContext());
             convertView = inflater.inflate(R.layout.store_adapter, parent, false);
@@ -64,9 +64,7 @@ public class StoreAdapter extends ArrayAdapter<StoreModel> implements ListAdapte
 
         viewHolder.txtName.setText(dataModel.getStoreName());
         viewHolder.txtAddress.setText(dataModel.getAddress());
-        //TODO : sa facem listener pe tot elementul, nu doar pe poza
-
-        //TODO : Pune imaginea in viewHolder, nu stiu exact cum salvam url-urile.
+        viewHolder.imageLogo.setImageBitmap(dataModel.getBitmap());
 
         return convertView;
     }

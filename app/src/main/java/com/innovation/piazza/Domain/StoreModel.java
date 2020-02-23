@@ -1,5 +1,9 @@
 package com.innovation.piazza.Domain;
 
+import android.graphics.Bitmap;
+
+import com.innovation.piazza.Adapters.StoreAdapter;
+
 public class StoreModel {
 
     private String key;
@@ -8,14 +12,17 @@ public class StoreModel {
     private String logo;
     private String latitude;
     private String longitude;
+    private Bitmap bitmap;
+    private StoreAdapter storeAdapter;
 
-    public StoreModel(String key, String name, String address, String logo, String latitude, String longitude) {
+    public StoreModel(String key, String name, String address, String logo, String latitude, String longitude, StoreAdapter storeAdapter) {
         this.key = key;
         this.name = name;
         this.address = address;
         this.logo = logo;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.storeAdapter = storeAdapter;
     }
 
     public String getKey() {
@@ -39,4 +46,11 @@ public class StoreModel {
     }
 
     public String getLongitude() { return longitude; }
+
+    public Bitmap getBitmap() { return bitmap; }
+
+    public void setBitmap(Bitmap bitmap) {
+        this.bitmap = bitmap;
+        storeAdapter.notifyDataSetChanged();
+    }
 }
