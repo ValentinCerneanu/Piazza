@@ -11,14 +11,14 @@ import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
-import com.innovation.piazza.Domain.StoreModel;
+import com.innovation.piazza.Domain.Store;
 import com.innovation.piazza.R;
 
 import java.util.ArrayList;
 
-public class StoreAdapter extends ArrayAdapter<StoreModel> implements ListAdapter {
+public class StoreAdapter extends ArrayAdapter<Store> implements ListAdapter {
 
-    private ArrayList<StoreModel> dataSet;
+    private ArrayList<Store> dataSet;
     private Context mContext;
 
     private static class  ViewHolder{
@@ -27,7 +27,7 @@ public class StoreAdapter extends ArrayAdapter<StoreModel> implements ListAdapte
         ImageView imageLogo;
     }
 
-    public StoreAdapter(ArrayList<StoreModel> data, Context context) {
+    public StoreAdapter(ArrayList<Store> data, Context context) {
         super(context, R.layout.store_adapter, data);
         this.dataSet = data;
         this.mContext = context;
@@ -37,7 +37,7 @@ public class StoreAdapter extends ArrayAdapter<StoreModel> implements ListAdapte
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        StoreModel dataModel = getItem(position);
+        Store dataModel = getItem(position);
         final ViewHolder viewHolder;
 
         final View result;

@@ -10,7 +10,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.innovation.piazza.Domain.StoreModel;
+import com.innovation.piazza.Domain.Store;
 
 import java.io.File;
 import java.io.IOException;
@@ -25,7 +25,7 @@ public class FirebaseCommunication {
         storage = FirebaseStorage.getInstance();
     }
 
-    public void getImage(final String url, final StoreModel storeModel) {
+    public void getImage(final String url, final Store store) {
         final File localFile;
         try {
             StorageReference storageReference = storage.getReference();
@@ -34,7 +34,7 @@ public class FirebaseCommunication {
             storageReference.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                    storeModel.setBitmap(BitmapFactory.decodeFile(localFile.getAbsolutePath()));
+                    store.setBitmap(BitmapFactory.decodeFile(localFile.getAbsolutePath()));
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override

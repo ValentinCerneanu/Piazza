@@ -32,6 +32,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 import com.innovation.piazza.Adapters.StoreAdapter;
+import com.innovation.piazza.Domain.Store;
 import com.innovation.piazza.Domain.StoreModel;
 import com.innovation.piazza.R;
 import com.innovation.piazza.Services.FirebaseCommunication;
@@ -52,8 +53,8 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseDatabase database;
     private DatabaseReference myRefToDatabase;
 
-    private JSONObject stores = null;
-    private ArrayList<StoreModel> storeModels = new ArrayList<>();
+    private JSONObject storesJson = null;
+    private ArrayList<Store> stores = new ArrayList<>();
     private StoreAdapter storeAdapter;
 
     private ListView storesList;
@@ -68,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
 
         getAddress();
 
-        storeAdapter = new StoreAdapter(storeModels, MainActivity.this);
+        storeAdapter = new StoreAdapter(stores, MainActivity.this);
         storesList = findViewById(R.id.stores_list);
         storesList.setAdapter(storeAdapter);
 
@@ -77,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
                 Intent nextActivity;
                 nextActivity = new Intent(getBaseContext(), SplashActivity.class);
-                StoreModel selectedStore = (StoreModel) arg0.getItemAtPosition(position);
+                Store selectedStore = (Store) arg0.getItemAtPosition(position);
                 startActivity(nextActivity);
             }
         });
@@ -95,23 +96,23 @@ public class MainActivity extends AppCompatActivity {
                     Gson gson = new Gson();
                     String gsonString = gson.toJson(dataSnapshot.getValue());
                     try {
-                        stores = new JSONObject(gsonString);
-                        storeModels.clear();
-                        Iterator<String> iterator = stores.keys();
+                        storesJson = new JSONObject(gsonString);
+                        stores.clear();
+                        Iterator<String> iterator = storesJson.keys();
                         while (iterator.hasNext()) {
                             String key = iterator.next();
                             try {
-                                JSONObject storeJson = new JSONObject(stores.get(key).toString());
-                                StoreModel store = new StoreModel(  key,
-                                                                    storeJson.getString("name"),
-                                                                    storeJson.getString("address"),
-                                                                    storeJson.getString("logo_url"),
-                                                                    storeJson.getString("latitude"),
-                                                                    storeJson.getString("longitude"),
+                                JSONObject storeJson = new JSONObject(storesJson.get(key).toString());
+                                Store store = new Store(  key,
+                                                                    storeJson.getString(StoreModel.NAME),
+                                                                    storeJson.getString(StoreModel.ADDRESS),
+                                                                    storeJson.getString(StoreModel.LOGO_URL),
+                                                                    storeJson.getString(StoreModel.LATITUDE),
+                                                                    storeJson.getString(StoreModel.LONGITUDE),
                                                                     storeAdapter);
                                 FirebaseCommunication firebaseCommunication = new FirebaseCommunication();
                                 firebaseCommunication.getImage(storeJson.getString("logo_url"), store);
-                                storeModels.add(store);
+                                stores.add(store);
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
