@@ -19,98 +19,36 @@
             android:layout_width="match_parent"
             android:background="#ffffff">
 
-            <ImageButton
-                android:id="@+id/hamburger_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_hamburger" />
+            <RelativeLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/barTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#ffffff"
-                android:textSize="20sp"/>
+                <ImageButton
+                    android:id="@+id/hamburger_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_hamburger" />
+
+                <EditText
+                    android:id="@+id/calculated_location"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textCapSentences"
+                    android:background="#ffffff"
+                    android:layout_toRightOf="@+id/hamburger_btn"
+                    android:layout_toLeftOf="@+id/search_button"
+                    android:layout_centerVertical="true"/>
+
+                <ImageButton
+                    android:id="@+id/search_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/ic_search" />
+            </RelativeLayout>
 
         </androidx.appcompat.widget.Toolbar>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:text="Adresa Gasita:" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <EditText
-                android:id="@+id/calculatedLocation"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:imeActionId="6"
-                android:imeActionLabel="@string/action_sign_in_short"
-                android:imeOptions="actionUnspecified"
-                android:inputType="text"
-                android:singleLine="true" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:text="@string/daca_se_aplica_completati_si_urmatoarele_campuri" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <EditText
-                android:id="@+id/detailedLocation_bloc"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:imeActionId="6"
-                android:imeActionLabel="@string/action_sign_in_short"
-                android:imeOptions="actionUnspecified"
-                android:inputType="text"
-                android:hint="@string/bloc"
-                android:singleLine="true" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <EditText
-                android:id="@+id/detailedLocation_apartament"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:imeActionId="6"
-                android:imeActionLabel="@string/action_sign_in_short"
-                android:imeOptions="actionUnspecified"
-                android:inputType="text"
-                android:hint="@string/apartament"
-                android:singleLine="true" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <EditText
-                android:id="@+id/detailedLocation_scara"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:imeActionId="6"
-                android:imeActionLabel="@string/action_sign_in_short"
-                android:imeOptions="actionUnspecified"
-                android:inputType="text"
-                android:hint="@string/scara"
-                android:singleLine="true" />
-
-        </com.google.android.material.textfield.TextInputLayout>
 
         <ListView
             android:id="@+id/stores_list"

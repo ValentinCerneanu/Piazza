@@ -1,12 +1,16 @@
 package com.innovation.piazza.Activities;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -43,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private ImageButton burgerBtn;
+    private EditText addressEditText;
 
     private FirebaseDatabase database;
     private DatabaseReference myRefToDatabase;
@@ -129,8 +134,8 @@ public class MainActivity extends AppCompatActivity {
     private void getAddress(){
         LocationService locationService = new LocationService(this);
         locationService.getAddressByLocation();
-        EditText editText = (EditText) findViewById(R.id.calculatedLocation);
-        editText.setText(locationService.getAddressLine() , TextView.BufferType.EDITABLE);
+        addressEditText = (EditText) findViewById(R.id.calculated_location);
+        addressEditText.setText(locationService.getAddressLine() , TextView.BufferType.EDITABLE);
     }
 
     private void saveLocalData() {
@@ -150,6 +155,14 @@ public class MainActivity extends AppCompatActivity {
         navigationView.bringToFront();
 
         drawerLayout = findViewById(R.id.drawerlayout);
+
+        drawerLayout.setOnTouchListener(new View.OnTouchListener(){
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                closeKeyboard(MainActivity.this, v);
+                return false;
+            }
+        });
 
         View headerLayout = navigationView.getHeaderView(0);
         TextView userEditText = (TextView) headerLayout.findViewById(R.id.user);
@@ -216,6 +229,7 @@ public class MainActivity extends AppCompatActivity {
         burgerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                closeKeyboard(MainActivity.this, v);
                 drawerLayout .openDrawer(Gravity.LEFT);
             }
         });
@@ -235,5 +249,11 @@ public class MainActivity extends AppCompatActivity {
                 //denied
             }
         }
+    }
+
+    private void closeKeyboard(Context context, View view) {
+        addressEditText.clearFocus();
+        InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 }
