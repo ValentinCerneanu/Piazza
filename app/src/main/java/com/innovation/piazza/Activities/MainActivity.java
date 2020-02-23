@@ -7,8 +7,10 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,12 +27,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
+import com.innovation.piazza.Adapters.StoreAdapter;
+import com.innovation.piazza.Domain.StoreModel;
 import com.innovation.piazza.R;
 import com.innovation.piazza.Services.LocationService;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 
 public class MainActivity extends AppCompatActivity {
@@ -42,6 +47,10 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseReference myRefToDatabase;
 
     private JSONObject stores = null;
+    private ArrayList<StoreModel> storeModels = new ArrayList<>();
+    private StoreAdapter storeAdapter;
+
+    private ListView storesList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +61,20 @@ public class MainActivity extends AppCompatActivity {
         setupToolbarAndDrawer();
 
         getAddress();
+
+        storeAdapter = new StoreAdapter(storeModels, MainActivity.this);
+        storesList = findViewById(R.id.stores_list);
+        storesList.setAdapter(storeAdapter);
+
+        storesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+                Intent nextActivity;
+                nextActivity = new Intent(getBaseContext(), SplashActivity.class);
+                StoreModel selectedStore = (StoreModel) arg0.getItemAtPosition(position);
+                startActivity(nextActivity);
+            }
+        });
 
         getStores();
     }
@@ -67,15 +90,24 @@ public class MainActivity extends AppCompatActivity {
                     String gsonString = gson.toJson(dataSnapshot.getValue());
                     try {
                         stores = new JSONObject(gsonString);
+                        storeModels.clear();
                         Iterator<String> iterator = stores.keys();
                         while (iterator.hasNext()) {
                             String key = iterator.next();
                             try {
-                                JSONObject store = new JSONObject(stores.get(key).toString());
+                                JSONObject storeJson = new JSONObject(stores.get(key).toString());
+                                StoreModel store = new StoreModel(  stores.get(key).toString(),
+                                                                    storeJson.getString("name"),
+                                                                    storeJson.getString("address"),
+                                                                    storeJson.getString("logo_url"),
+                                                                    storeJson.getString("latitude"),
+                                                                    storeJson.getString("longitude"));
+                                storeModels.add(store);
                             } catch (JSONException e) {
-                                // Something went wrong!
+                                e.printStackTrace();
                             }
                         }
+                        storeAdapter.notifyDataSetChanged();
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }

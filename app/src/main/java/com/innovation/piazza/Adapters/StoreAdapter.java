@@ -8,49 +8,35 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
 import android.widget.TextView;
 
-import com.google.android.material.snackbar.Snackbar;
+import com.innovation.piazza.Domain.StoreModel;
 import com.innovation.piazza.R;
 import java.util.ArrayList;
 
-public class CustomAdapterStores extends ArrayAdapter<StoresModel> implements View.OnClickListener {
+public class StoreAdapter extends ArrayAdapter<StoreModel> implements ListAdapter {
 
-    private ArrayList<StoresModel> dataSet;
-    Context mContext;
+    private ArrayList<StoreModel> dataSet;
+    private Context mContext;
 
     private static class  ViewHolder{
         TextView txtName;
-        TextView txtDescription;
+        TextView txtAddress;
         ImageView imageLogo;
     }
 
-    public CustomAdapterStores(ArrayList<StoresModel> data, Context context) {
+    public StoreAdapter(ArrayList<StoreModel> data, Context context) {
         super(context, R.layout.store_adapter, data);
         this.dataSet = data;
-        this.mContext=context;
-    }
-
-    public void onClick(View v) {
-
-        int position=(Integer) v.getTag();
-        Object object= getItem(position);
-        StoresModel dataModel=(StoresModel) object;
-
-        switch (v.getId())
-        {
-            case R.id.storeImage:
-                Snackbar.make(v, "Shop name: " +dataModel.getStoreName(), Snackbar.LENGTH_LONG)
-                        .setAction("No action", null).show();
-                break;
-        }
+        this.mContext = context;
     }
 
     private int lastPosition = -1;
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        StoresModel dataModel = getItem(position);
+        StoreModel dataModel = getItem(position);
         ViewHolder viewHolder;
 
         final View result;
@@ -61,7 +47,7 @@ public class CustomAdapterStores extends ArrayAdapter<StoresModel> implements Vi
             LayoutInflater inflater = LayoutInflater.from(getContext());
             convertView = inflater.inflate(R.layout.store_adapter, parent, false);
             viewHolder.txtName = (TextView) convertView.findViewById(R.id.storeName);
-            viewHolder.txtDescription = (TextView) convertView.findViewById(R.id.storeDescription);
+            viewHolder.txtAddress = (TextView) convertView.findViewById(R.id.address);
             viewHolder.imageLogo = (ImageView) convertView.findViewById(R.id.storeImage);
 
             result = convertView;
@@ -77,8 +63,8 @@ public class CustomAdapterStores extends ArrayAdapter<StoresModel> implements Vi
         lastPosition = position;
 
         viewHolder.txtName.setText(dataModel.getStoreName());
-        viewHolder.txtDescription.setText(dataModel.getStoreDescription());
-        viewHolder.imageLogo.setOnClickListener(this); //  TODO : sa facem listener pe tot elementul, nu doar pe poza
+        viewHolder.txtAddress.setText(dataModel.getAddress());
+        //TODO : sa facem listener pe tot elementul, nu doar pe poza
 
         //TODO : Pune imaginea in viewHolder, nu stiu exact cum salvam url-urile.
 
