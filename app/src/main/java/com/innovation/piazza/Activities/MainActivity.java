@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
                 Intent nextActivity;
-                nextActivity = new Intent(getBaseContext(), SplashActivity.class);
+                nextActivity = new Intent(getBaseContext(), CategoriesActivity.class);
                 Store selectedStore = (Store) arg0.getItemAtPosition(position);
                 startActivity(nextActivity);
             }
@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
                                                                     storeJson.getString(StoreModel.LONGITUDE),
                                                                     storeAdapter);
                                 FirebaseCommunication firebaseCommunication = new FirebaseCommunication();
-                                firebaseCommunication.getImage(storeJson.getString("logo_url"), store);
+                                firebaseCommunication.getImageStore(storeJson.getString("logo_url"), store);
                                 stores.add(store);
                             } catch (JSONException e) {
                                 e.printStackTrace();
