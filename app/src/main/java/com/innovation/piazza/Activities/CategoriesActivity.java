@@ -15,6 +15,8 @@ import com.google.gson.Gson;
 import com.innovation.piazza.Adapters.CategoryAdapater;
 import com.innovation.piazza.Domain.Category;
 import com.innovation.piazza.Domain.CategoryModel;
+import com.innovation.piazza.Domain.Store;
+import com.innovation.piazza.Domain.StoreModel;
 import com.innovation.piazza.R;
 
 
@@ -35,12 +37,15 @@ public class CategoriesActivity extends AppCompatActivity {
     private JSONObject categoriesJson = null;
     private CategoryAdapater categoryAdapater;
     private ArrayList<Category> categories = new ArrayList<>();
+    private Store selectedStore;
 
     private GridView categoriesList;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+
+        selectedStore = getIntent().getParcelableExtra(StoreModel.SELECTED_STORE);
 
         setContentView(R.layout.activity_categories);
 
@@ -64,7 +69,7 @@ public class CategoriesActivity extends AppCompatActivity {
 
     private void getCategories() {
         database = FirebaseDatabase.getInstance();
-        myRefToDatabase = database.getReference("Stores/AuchanAfi/Categories");
+        myRefToDatabase = database.getReference("Stores").child(selectedStore.getKey()).child("Categories");
         myRefToDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -80,14 +85,18 @@ public class CategoriesActivity extends AppCompatActivity {
                             try {
                                 JSONObject categoryJson = new JSONObject(categoriesJson.get(key).toString());
                                 Category category = new Category(  key,
-                                        categoriesJson.getString(CategoryModel.NAME),
-                                        categoriesJson.getString(CategoryModel.PICTURE),
+                                        categoryJson.getString(CategoryModel.NAME),
+                                        categoryJson.getString(CategoryModel.PICTURE),
                                         categoryAdapater);
-                                /*TODO de luat imaginea din firebase (PS: nu le-am pus inca
+
+                                /*TODO de luat imaginea din firebase (PS: nu le-am pus inca)
+
                                 FirebaseCommunication firebaseCommunication = new FirebaseCommunication();
                                 firebaseCommunication.getImageCategory(categoriesJson.getString("picture", category));
                                  */
+
                                 categories.add(category);
+
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }

@@ -79,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent nextActivity;
                 nextActivity = new Intent(getBaseContext(), CategoriesActivity.class);
                 Store selectedStore = (Store) arg0.getItemAtPosition(position);
+                nextActivity.putExtra(StoreModel.SELECTED_STORE, selectedStore);
                 startActivity(nextActivity);
             }
         });

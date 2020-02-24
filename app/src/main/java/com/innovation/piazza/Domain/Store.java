@@ -1,10 +1,14 @@
 package com.innovation.piazza.Domain;
 
 import android.graphics.Bitmap;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import com.innovation.piazza.Adapters.StoreAdapter;
 
-public class Store {
+import java.io.Serializable;
+
+public class Store implements Parcelable {
 
     private String key;
     private String name;
@@ -25,11 +29,49 @@ public class Store {
         this.storeAdapter = storeAdapter;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(key);
+        dest.writeString(name);
+        dest.writeString(address);
+        dest.writeString(logo);
+        dest.writeString(latitude);
+        dest.writeString(longitude);
+        dest.writeParcelable(bitmap, flags);
+    }
+
+    protected Store(Parcel in) {
+        key = in.readString();
+        name = in.readString();
+        address = in.readString();
+        logo = in.readString();
+        latitude = in.readString();
+        longitude = in.readString();
+        bitmap = in.readParcelable(Bitmap.class.getClassLoader());
+    }
+
+    public static final Creator<Store> CREATOR = new Creator<Store>() {
+        @Override
+        public Store createFromParcel(Parcel in) {
+            return new Store(in);
+        }
+
+        @Override
+        public Store[] newArray(int size) {
+            return new Store[size];
+        }
+    };
+
     public String getKey() {
         return key;
     }
 
-    public String getStoreName() {
+    public String getName() {
         return name;
     }
 
@@ -53,4 +95,6 @@ public class Store {
         this.bitmap = bitmap;
         storeAdapter.notifyDataSetChanged();
     }
+
+
 }

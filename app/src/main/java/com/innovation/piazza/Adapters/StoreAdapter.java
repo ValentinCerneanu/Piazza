@@ -62,7 +62,7 @@ public class StoreAdapter extends ArrayAdapter<Store> implements ListAdapter {
         result.startAnimation(animation);
         lastPosition = position;
 
-        viewHolder.txtName.setText(dataModel.getStoreName());
+        viewHolder.txtName.setText(dataModel.getName());
         viewHolder.txtAddress.setText(dataModel.getAddress());
         viewHolder.imageLogo.setImageBitmap(dataModel.getBitmap());
 
