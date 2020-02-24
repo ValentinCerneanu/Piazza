@@ -49,7 +49,7 @@ public class FirebaseCommunication {
         }
     }
 
-   /* public void getImageCategory(final String url, final Category category) {
+    public void getImageCategory(final String url, final Category category) {
         final File localFile;
         try {
             StorageReference storageReference = storage.getReference();
@@ -58,7 +58,7 @@ public class FirebaseCommunication {
             storageReference.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                    store.setBitmap(BitmapFactory.decodeFile(localFile.getAbsolutePath()));
+                    category.setBitmap(BitmapFactory.decodeFile(localFile.getAbsolutePath()));
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
@@ -72,5 +72,4 @@ public class FirebaseCommunication {
         }
     }
 
-    */
 }

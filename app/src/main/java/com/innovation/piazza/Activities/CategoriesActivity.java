@@ -18,6 +18,7 @@ import com.innovation.piazza.Domain.CategoryModel;
 import com.innovation.piazza.Domain.Store;
 import com.innovation.piazza.Domain.StoreModel;
 import com.innovation.piazza.R;
+import com.innovation.piazza.Services.FirebaseCommunication;
 
 
 import org.json.JSONException;
@@ -89,11 +90,9 @@ public class CategoriesActivity extends AppCompatActivity {
                                         categoryJson.getString(CategoryModel.PICTURE),
                                         categoryAdapater);
 
-                                /*TODO de luat imaginea din firebase (PS: nu le-am pus inca)
-
                                 FirebaseCommunication firebaseCommunication = new FirebaseCommunication();
-                                firebaseCommunication.getImageCategory(categoriesJson.getString("picture", category));
-                                 */
+                                firebaseCommunication.getImageCategory(categoryJson.getString("picture"), category);
+
 
                                 categories.add(category);
 
