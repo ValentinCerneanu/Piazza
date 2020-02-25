@@ -14,7 +14,6 @@ public class Category implements Parcelable {
     private Bitmap bitmap;
     private CategoryAdapter categoryAdapter;
 
-
     public Category(String key, String name, String picture, CategoryAdapter categoryAdapter) {
         this.key = key;
         this.name = name;

@@ -32,8 +32,6 @@ public class ItemAdapter extends ArrayAdapter<Item> implements ListAdapter {
         this.mContext = context;
     }
 
-    private int lastPosition = -1;
-
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         Item dataModel = getItem(position);
@@ -48,7 +46,7 @@ public class ItemAdapter extends ArrayAdapter<Item> implements ListAdapter {
             viewHolder.txtName = (TextView) convertView.findViewById(R.id.name);
             viewHolder.txtDescription = (TextView) convertView.findViewById(R.id.description);
             viewHolder.txtPrice = (TextView) convertView.findViewById(R.id.price);
-            viewHolder.imagePicture = (ImageView) convertView.findViewById(R.id.picture);
+            viewHolder.imagePicture = (ImageView) convertView.findViewById(R.id.item_picture);
 
             result = convertView;
 
@@ -61,7 +59,7 @@ public class ItemAdapter extends ArrayAdapter<Item> implements ListAdapter {
         viewHolder.txtName.setText(dataModel.getName());
         viewHolder.txtDescription.setText(dataModel.getDescription());
         viewHolder.txtPrice.setText(dataModel.getPrice().toString());
-        //viewHolder.imagePicture.setImageBitmap(dataModel.getBitmap());
+        viewHolder.imagePicture.setImageBitmap(dataModel.getBitmap());
 
         return convertView;
     }

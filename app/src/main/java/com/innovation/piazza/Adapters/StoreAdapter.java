@@ -31,8 +31,6 @@ public class StoreAdapter extends ArrayAdapter<Store> implements ListAdapter {
         this.mContext = context;
     }
 
-    private int lastPosition = -1;
-
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         Store dataModel = getItem(position);

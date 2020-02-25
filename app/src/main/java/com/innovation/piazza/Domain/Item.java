@@ -78,5 +78,6 @@ public class Item {
 
     public void setBitmap(Bitmap bitmap) {
         this.bitmap = bitmap;
+        itemAdapter.notifyDataSetChanged();
     }
 }

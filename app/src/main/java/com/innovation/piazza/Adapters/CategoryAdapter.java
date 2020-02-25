@@ -31,8 +31,6 @@ public class CategoryAdapter extends ArrayAdapter<Category> implements ListAdapt
         this.mContext = context;
     }
 
-    private int lastPosition = -1;
-
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         Category dataModel = getItem(position);

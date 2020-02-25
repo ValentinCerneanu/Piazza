@@ -93,9 +93,7 @@ public class CategoriesActivity extends AppCompatActivity {
                                 FirebaseCommunication firebaseCommunication = new FirebaseCommunication();
                                 firebaseCommunication.getImageCategory(categoryJson.getString("picture"), category);
 
-
                                 categories.add(category);
-
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }

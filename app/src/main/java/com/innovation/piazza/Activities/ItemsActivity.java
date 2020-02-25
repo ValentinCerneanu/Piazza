@@ -18,6 +18,7 @@ import com.innovation.piazza.Domain.CategoryModel;
 import com.innovation.piazza.Domain.Item;
 import com.innovation.piazza.Domain.ItemModel;
 import com.innovation.piazza.R;
+import com.innovation.piazza.Services.FirebaseCommunication;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -76,8 +77,8 @@ public class ItemsActivity extends AppCompatActivity {
                                         itemJson.getDouble(ItemModel.GRAMAJ),
                                         itemJson.getString(ItemModel.PICTURE),
                                         itemAdapter);
-/*                                FirebaseCommunication firebaseCommunication = new FirebaseCommunication();
-                                firebaseCommunication.getImageStore(storeJson.getString("logo_url"), store);*/
+                                FirebaseCommunication firebaseCommunication = new FirebaseCommunication();
+                                firebaseCommunication.getImageItem(itemJson.getString("picture"), item);
                                 items.add(item);
                             } catch (JSONException e) {
                                 e.printStackTrace();
