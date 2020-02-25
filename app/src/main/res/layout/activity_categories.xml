@@ -28,6 +28,7 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:numColumns="3"
+        android:columnWidth="100dp"
         android:verticalSpacing="24dp"
         android:horizontalSpacing="10dp"
         android:stretchMode="spacingWidthUniform"
