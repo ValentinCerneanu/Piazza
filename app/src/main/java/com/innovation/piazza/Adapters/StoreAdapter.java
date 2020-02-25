@@ -4,8 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
@@ -57,10 +55,6 @@ public class StoreAdapter extends ArrayAdapter<Store> implements ListAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
             result = convertView;
         }
-
-        Animation animation = AnimationUtils.loadAnimation(mContext, (position > lastPosition) ? R.anim.up_from_bottom : R.anim.down_from_top);
-        result.startAnimation(animation);
-        lastPosition = position;
 
         viewHolder.txtName.setText(dataModel.getName());
         viewHolder.txtAddress.setText(dataModel.getAddress());

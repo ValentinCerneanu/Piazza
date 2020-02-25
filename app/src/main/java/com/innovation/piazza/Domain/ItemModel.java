@@ -4,8 +4,8 @@ public class ItemModel {
     public static String NAME = "name";
     public static String DESCRIPTION = "description";
     public static String PICTURE = "picture";
-    public static String PRICE = "5";
-    public static String GRAMAJ = "5";
+    public static String PRICE = "price";
+    public static String GRAMAJ = "gramaj";
 
-    public static String SELECTED_CATEGORY = "selected_category";
+    public static String SELECTED_ITEM= "selected_item";
 }

@@ -54,7 +54,7 @@ public class ItemsActivity extends AppCompatActivity {
 
     private void getItems() {
         database = FirebaseDatabase.getInstance();
-        myRefToDatabase = database.getReference("Items").child(selectedCategory.getKey());
+        myRefToDatabase = database.getReference("Categories").child(selectedCategory.getKey());
         myRefToDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

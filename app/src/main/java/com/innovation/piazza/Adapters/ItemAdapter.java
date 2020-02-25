@@ -4,8 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
@@ -23,6 +21,8 @@ public class ItemAdapter extends ArrayAdapter<Item> implements ListAdapter {
 
     private static class  ViewHolder{
         TextView txtName;
+        TextView txtDescription;
+        TextView txtPrice;
         ImageView imagePicture;
     }
 
@@ -46,6 +46,8 @@ public class ItemAdapter extends ArrayAdapter<Item> implements ListAdapter {
             LayoutInflater inflater = LayoutInflater.from(getContext());
             convertView = inflater.inflate(R.layout.item_adapter, parent, false);
             viewHolder.txtName = (TextView) convertView.findViewById(R.id.name);
+            viewHolder.txtDescription = (TextView) convertView.findViewById(R.id.description);
+            viewHolder.txtPrice = (TextView) convertView.findViewById(R.id.price);
             viewHolder.imagePicture = (ImageView) convertView.findViewById(R.id.picture);
 
             result = convertView;
@@ -56,12 +58,10 @@ public class ItemAdapter extends ArrayAdapter<Item> implements ListAdapter {
             result = convertView;
         }
 
-        Animation animation = AnimationUtils.loadAnimation(mContext, (position > lastPosition) ? R.anim.up_from_bottom : R.anim.down_from_top);
-        result.startAnimation(animation);
-        lastPosition = position;
-
         viewHolder.txtName.setText(dataModel.getName());
-        viewHolder.imagePicture.setImageBitmap(dataModel.getBitmap());
+        viewHolder.txtDescription.setText(dataModel.getDescription());
+        viewHolder.txtPrice.setText(dataModel.getPrice().toString());
+        //viewHolder.imagePicture.setImageBitmap(dataModel.getBitmap());
 
         return convertView;
     }

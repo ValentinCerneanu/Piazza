@@ -4,14 +4,14 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.TextView;
+
 import com.innovation.piazza.Domain.Category;
 import com.innovation.piazza.R;
+
 import java.util.ArrayList;
 
 public class CategoryAdapter extends ArrayAdapter<Category> implements ListAdapter{
@@ -54,10 +54,6 @@ public class CategoryAdapter extends ArrayAdapter<Category> implements ListAdapt
             viewHolder = (ViewHolder) convertView.getTag();
             result = convertView;
         }
-
-        Animation animation = AnimationUtils.loadAnimation(mContext, (position > lastPosition) ? R.anim.up_from_bottom : R.anim.down_from_top);
-        result.startAnimation(animation);
-        lastPosition = position;
 
         viewHolder.txtName.setText(dataModel.getName());
         viewHolder.imagePicture.setImageBitmap(dataModel.getBitmap());
