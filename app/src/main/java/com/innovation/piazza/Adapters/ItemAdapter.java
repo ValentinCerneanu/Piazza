@@ -10,14 +10,15 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.TextView;
-import com.innovation.piazza.Domain.Category;
+
+import com.innovation.piazza.Domain.Item;
 import com.innovation.piazza.R;
+
 import java.util.ArrayList;
 
-public class CategoryAdapater extends ArrayAdapter<Category> implements ListAdapter{
+public class ItemAdapter extends ArrayAdapter<Item> implements ListAdapter {
 
-
-    private ArrayList<Category> dataSet;
+    private ArrayList<Item> dataSet;
     private Context mContext;
 
     private static class  ViewHolder{
@@ -25,8 +26,8 @@ public class CategoryAdapater extends ArrayAdapter<Category> implements ListAdap
         ImageView imagePicture;
     }
 
-    public CategoryAdapater(ArrayList<Category> data, Context context) {
-        super(context, R.layout.category_adapter, data);
+    public ItemAdapter(ArrayList<Item> data, Context context) {
+        super(context, R.layout.item_adapter, data);
         this.dataSet = data;
         this.mContext = context;
     }
@@ -35,15 +36,15 @@ public class CategoryAdapater extends ArrayAdapter<Category> implements ListAdap
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        Category dataModel = getItem(position);
-        final ViewHolder viewHolder;
+        Item dataModel = getItem(position);
+        final ItemAdapter.ViewHolder viewHolder;
 
         final View result;
 
         if(convertView == null) {
-            viewHolder = new ViewHolder();
+            viewHolder = new ItemAdapter.ViewHolder();
             LayoutInflater inflater = LayoutInflater.from(getContext());
-            convertView = inflater.inflate(R.layout.category_adapter, parent, false);
+            convertView = inflater.inflate(R.layout.item_adapter, parent, false);
             viewHolder.txtName = (TextView) convertView.findViewById(R.id.name);
             viewHolder.imagePicture = (ImageView) convertView.findViewById(R.id.picture);
 
@@ -51,7 +52,7 @@ public class CategoryAdapater extends ArrayAdapter<Category> implements ListAdap
 
             convertView.setTag(viewHolder);
         } else {
-            viewHolder = (ViewHolder) convertView.getTag();
+            viewHolder = (ItemAdapter.ViewHolder) convertView.getTag();
             result = convertView;
         }
 

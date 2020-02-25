@@ -12,7 +12,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
-import com.innovation.piazza.Adapters.CategoryAdapater;
+import com.innovation.piazza.Adapters.CategoryAdapter;
 import com.innovation.piazza.Domain.Category;
 import com.innovation.piazza.Domain.CategoryModel;
 import com.innovation.piazza.Domain.Store;
@@ -36,7 +36,7 @@ public class CategoriesActivity extends AppCompatActivity {
     private DatabaseReference myRefToDatabase;
 
     private JSONObject categoriesJson = null;
-    private CategoryAdapater categoryAdapater;
+    private CategoryAdapter categoryAdapter;
     private ArrayList<Category> categories = new ArrayList<>();
     private Store selectedStore;
 
@@ -50,22 +50,22 @@ public class CategoriesActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_categories);
 
-        categoryAdapater = new CategoryAdapater(categories, CategoriesActivity.this);
+        categoryAdapter = new CategoryAdapter(categories, CategoriesActivity.this);
         categoriesList = findViewById(R.id.categories_list);
-        categoriesList.setAdapter(categoryAdapater);
+        categoriesList.setAdapter(categoryAdapter);
 
         categoriesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
                 Intent nextActivity;
-                nextActivity = new Intent(getBaseContext(), SplashActivity.class);
+                nextActivity = new Intent(getBaseContext(), ItemsActivity.class);
                 Category selectedCategory = (Category) arg0.getItemAtPosition(position);
+                nextActivity.putExtra(CategoryModel.SELECTED_CATEGORY, selectedCategory);
                 startActivity(nextActivity);
             }
         });
 
         getCategories();
-
     }
 
     private void getCategories() {
@@ -88,7 +88,7 @@ public class CategoriesActivity extends AppCompatActivity {
                                 Category category = new Category(  key,
                                         categoryJson.getString(CategoryModel.NAME),
                                         categoryJson.getString(CategoryModel.PICTURE),
-                                        categoryAdapater);
+                                        categoryAdapter);
 
                                 FirebaseCommunication firebaseCommunication = new FirebaseCommunication();
                                 firebaseCommunication.getImageCategory(categoryJson.getString("picture"), category);
@@ -100,7 +100,7 @@ public class CategoriesActivity extends AppCompatActivity {
                                 e.printStackTrace();
                             }
                         }
-                        categoryAdapater.notifyDataSetChanged();
+                        categoryAdapter.notifyDataSetChanged();
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }

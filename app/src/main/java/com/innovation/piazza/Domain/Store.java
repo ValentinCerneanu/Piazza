@@ -6,8 +6,6 @@ import android.os.Parcelable;
 
 import com.innovation.piazza.Adapters.StoreAdapter;
 
-import java.io.Serializable;
-
 public class Store implements Parcelable {
 
     private String key;
