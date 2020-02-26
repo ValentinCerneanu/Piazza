@@ -10,7 +10,9 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
         android:background="#ffffff"
-        android:padding="15dp">
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="10dp">
 
         <ImageView
             android:id="@+id/item_picture"
@@ -21,18 +23,19 @@
             android:id="@+id/edit_quantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
             android:background="#ffffff"
             android:orientation="horizontal"
-            android:padding="15dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="10dp"
             android:layout_alignParentRight="true"
             android:layout_below="@+id/description">
 
             <ImageButton
                 android:id="@+id/minus_button"
                 android:src="@drawable/ic_remove_circle"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:layout_weight="0.11" />
 
@@ -49,8 +52,8 @@
             <ImageButton
                 android:id="@+id/plus_button"
                 android:src="@drawable/ic_add_circle"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:layout_toEndOf="@+id/quantity"
                 android:layout_toRightOf="@+id/quantity"

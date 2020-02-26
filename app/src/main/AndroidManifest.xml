@@ -42,6 +42,10 @@
             android:screenOrientation="portrait">
         </activity>
 
+        <activity android:name=".Activities.CartActivity"
+            android:screenOrientation="portrait">
+        </activity>
+
         <activity android:name=".Activities.SignInMethodActivity"
             android:screenOrientation="portrait">
         </activity>

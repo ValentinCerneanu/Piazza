@@ -7,7 +7,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageButton;
 
-import com.innovation.piazza.Activities.SplashActivity;
+import com.innovation.piazza.Activities.CartActivity;
 
 public class CartButton extends ImageButton {
 
@@ -17,7 +17,7 @@ public class CartButton extends ImageButton {
             @Override
             public void onClick(View v) {
                 Intent nextActivity;
-                nextActivity = new Intent(context, SplashActivity.class);
+                nextActivity = new Intent(context, CartActivity.class);
                 ((Activity) context).startActivity(nextActivity);
             }
         });

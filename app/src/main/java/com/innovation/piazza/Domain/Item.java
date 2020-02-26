@@ -13,6 +13,18 @@ public class Item {
     private String picture;
     private Bitmap bitmap;
     private ItemAdapter itemAdapter;
+    private int quantity;
+
+    protected Item(Item item) {
+        this.key = item.key;
+        this.name = item.name;
+        this.description = item.description;
+        this.price = item.price;
+        this.gramaj = item.gramaj;
+        this.picture = item.picture;
+        this.itemAdapter = item.itemAdapter;
+        this.quantity = 0;
+    };
 
     public Item(String key, String name, String description, Double price, Double gramaj, String picture, ItemAdapter itemAdapter) {
         this.key = key;
@@ -79,5 +91,13 @@ public class Item {
     public void setBitmap(Bitmap bitmap) {
         this.bitmap = bitmap;
         itemAdapter.notifyDataSetChanged();
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }

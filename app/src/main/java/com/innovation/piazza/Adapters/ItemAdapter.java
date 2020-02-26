@@ -1,6 +1,7 @@
 package com.innovation.piazza.Adapters;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +12,11 @@ import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
+
 import com.innovation.piazza.Domain.Item;
 import com.innovation.piazza.R;
+import com.innovation.piazza.Repository.CartRepository;
 
 import java.util.ArrayList;
 
@@ -41,7 +45,7 @@ public class ItemAdapter extends ArrayAdapter<Item> implements ListAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        Item dataModel = getItem(position);
+        final Item selectedItem = getItem(position);
         final ItemAdapter.ViewHolder viewHolder;
 
         final View result;
@@ -66,10 +70,11 @@ public class ItemAdapter extends ArrayAdapter<Item> implements ListAdapter {
             result = convertView;
         }
 
-        viewHolder.txtName.setText(dataModel.getName());
-        viewHolder.txtDescription.setText(dataModel.getDescription());
-        viewHolder.txtPrice.setText(dataModel.getPrice().toString());
-        viewHolder.imagePicture.setImageBitmap(dataModel.getBitmap());
+        viewHolder.txtName.setText(selectedItem.getName());
+        viewHolder.txtDescription.setText(selectedItem.getDescription());
+        viewHolder.quantity.setText(String.valueOf(CartRepository.getInstance().getQuantity(selectedItem.getKey())));
+        viewHolder.txtPrice.setText(selectedItem.getPrice().toString());
+        viewHolder.imagePicture.setImageBitmap(selectedItem.getBitmap());
 
         viewHolder.minusButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,6 +90,26 @@ public class ItemAdapter extends ArrayAdapter<Item> implements ListAdapter {
             public void onClick(View v) {
                 int quantity = Integer.parseInt(viewHolder.quantity.getText().toString());
                 viewHolder.quantity.setText(String.valueOf(++quantity));
+
+                CartRepository cartRepository = CartRepository.getInstance();
+                selectedItem.setQuantity(quantity);
+                if(cartRepository.addItemInCart(selectedItem, selectedStoreKey)){
+                    //TODO: o animatie pe butonul de cart
+                } else {
+                    new AlertDialog.Builder(mContext)
+                            .setTitle("Produse din alt magazin")
+                            .setMessage("Ai in cos produse de la alt magazin! Doresti sa stergi cosul curent si sa incepi unul nou cu acest produs?")
+
+                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    CartRepository.getInstance().clearCart();
+                                    CartRepository.getInstance().addItemInCart(selectedItem, selectedStoreKey);
+                                }
+                            })
+                            .setNegativeButton(android.R.string.no, null)
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .show();
+                }
             }
         });
 
