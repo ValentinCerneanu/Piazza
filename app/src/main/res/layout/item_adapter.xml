@@ -29,7 +29,7 @@
             android:layout_below="@+id/description">
 
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/minus_button"
                 android:src="@drawable/ic_remove_circle"
                 android:layout_width="40dp"
@@ -38,7 +38,7 @@
                 android:layout_weight="0.11" />
 
             <EditText
-                android:id="@+id/number"
+                android:id="@+id/quantity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -47,14 +47,14 @@
                 android:textSize="30sp"
                 android:textStyle="bold" />
 
-            <ImageView
-                android:id="@+id/add_button"
+            <ImageButton
+                android:id="@+id/plus_button"
                 android:src="@drawable/ic_add_circle"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center"
-                android:layout_toEndOf="@+id/number"
-                android:layout_toRightOf="@+id/number"
+                android:layout_toEndOf="@+id/quantity"
+                android:layout_toRightOf="@+id/quantity"
                 android:layout_weight="0.11" />
 
         </LinearLayout>

@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.TextView;
@@ -24,6 +26,9 @@ public class ItemAdapter extends ArrayAdapter<Item> implements ListAdapter {
         TextView txtDescription;
         TextView txtPrice;
         ImageView imagePicture;
+        ImageButton minusButton;
+        ImageButton plusButton;
+        EditText quantity;
     }
 
     public ItemAdapter(ArrayList<Item> data, Context context) {
@@ -47,6 +52,9 @@ public class ItemAdapter extends ArrayAdapter<Item> implements ListAdapter {
             viewHolder.txtDescription = (TextView) convertView.findViewById(R.id.description);
             viewHolder.txtPrice = (TextView) convertView.findViewById(R.id.price);
             viewHolder.imagePicture = (ImageView) convertView.findViewById(R.id.item_picture);
+            viewHolder.minusButton = (ImageButton) convertView.findViewById(R.id.minus_button);
+            viewHolder.plusButton = (ImageButton) convertView.findViewById(R.id.plus_button);
+            viewHolder.quantity = (EditText) convertView.findViewById(R.id.quantity);
 
             result = convertView;
 
@@ -60,6 +68,23 @@ public class ItemAdapter extends ArrayAdapter<Item> implements ListAdapter {
         viewHolder.txtDescription.setText(dataModel.getDescription());
         viewHolder.txtPrice.setText(dataModel.getPrice().toString());
         viewHolder.imagePicture.setImageBitmap(dataModel.getBitmap());
+
+        viewHolder.minusButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int quantity = Integer.parseInt(viewHolder.quantity.getText().toString());
+                if(quantity > 0)
+                    viewHolder.quantity.setText(String.valueOf(--quantity));
+            }
+        });
+
+        viewHolder.plusButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int quantity = Integer.parseInt(viewHolder.quantity.getText().toString());
+                viewHolder.quantity.setText(String.valueOf(++quantity));
+            }
+        });
 
         return convertView;
     }
