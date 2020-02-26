@@ -63,6 +63,7 @@ public class CategoriesActivity extends AppCompatActivity {
                 nextActivity = new Intent(getBaseContext(), ItemsActivity.class);
                 Category selectedCategory = (Category) arg0.getItemAtPosition(position);
                 nextActivity.putExtra(CategoryModel.SELECTED_CATEGORY, selectedCategory);
+                nextActivity.putExtra(StoreModel.SELECTED_STORE, selectedStore.getKey());
                 startActivity(nextActivity);
             }
         });
