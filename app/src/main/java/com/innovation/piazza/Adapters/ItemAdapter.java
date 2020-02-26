@@ -20,6 +20,7 @@ public class ItemAdapter extends ArrayAdapter<Item> implements ListAdapter {
 
     private ArrayList<Item> dataSet;
     private Context mContext;
+    private String selectedStoreKey;
 
     private static class  ViewHolder{
         TextView txtName;
@@ -31,10 +32,11 @@ public class ItemAdapter extends ArrayAdapter<Item> implements ListAdapter {
         EditText quantity;
     }
 
-    public ItemAdapter(ArrayList<Item> data, Context context) {
+    public ItemAdapter(ArrayList<Item> data, Context context, String selectedStoreKey) {
         super(context, R.layout.item_adapter, data);
         this.dataSet = data;
         this.mContext = context;
+        this.selectedStoreKey = selectedStoreKey;
     }
 
     @Override

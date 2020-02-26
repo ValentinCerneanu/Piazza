@@ -18,6 +18,7 @@ import com.innovation.piazza.Domain.Category;
 import com.innovation.piazza.Domain.CategoryModel;
 import com.innovation.piazza.Domain.Item;
 import com.innovation.piazza.Domain.ItemModel;
+import com.innovation.piazza.Domain.StoreModel;
 import com.innovation.piazza.R;
 import com.innovation.piazza.Services.FirebaseCommunication;
 
@@ -37,6 +38,7 @@ public class ItemsActivity extends AppCompatActivity {
     private ItemAdapter itemAdapter;
 
     private Category selectedCategory;
+    private String selectedStoreKey;
 
     private ListView itemsList;
     private TextView selectedCategoryTextView;
@@ -48,13 +50,14 @@ public class ItemsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_items);
 
         selectedCategory = getIntent().getParcelableExtra(CategoryModel.SELECTED_CATEGORY);
+        selectedStoreKey = getIntent().getStringExtra(StoreModel.SELECTED_STORE);
 
         selectedCategoryTextView = findViewById(R.id.toolbar_text);
         selectedCategoryTextView.setText(selectedCategory.getName());
 
         getItems();
 
-        itemAdapter = new ItemAdapter(items, ItemsActivity.this);
+        itemAdapter = new ItemAdapter(items, ItemsActivity.this, selectedStoreKey);
         itemsList = findViewById(R.id.items_list);
         itemsList.setAdapter(itemAdapter);
     }
