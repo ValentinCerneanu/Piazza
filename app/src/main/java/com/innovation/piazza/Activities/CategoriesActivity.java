@@ -5,6 +5,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -20,15 +24,11 @@ import com.innovation.piazza.Domain.StoreModel;
 import com.innovation.piazza.R;
 import com.innovation.piazza.Services.FirebaseCommunication;
 
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 public class CategoriesActivity extends AppCompatActivity {
 
@@ -41,14 +41,16 @@ public class CategoriesActivity extends AppCompatActivity {
     private Store selectedStore;
 
     private GridView categoriesList;
+    private TextView selectedStoreTextView;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_categories);
 
         selectedStore = getIntent().getParcelableExtra(StoreModel.SELECTED_STORE);
-
-        setContentView(R.layout.activity_categories);
+        selectedStoreTextView = findViewById(R.id.toolbar_text);
+        selectedStoreTextView.setText(selectedStore.getName());
 
         categoryAdapter = new CategoryAdapter(categories, CategoriesActivity.this);
         categoriesList = findViewById(R.id.categories_list);

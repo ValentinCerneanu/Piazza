@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:visibility="visible"
+        android:layout_height="60dp"
+        android:layout_width="match_parent"
+        android:background="#ffffff">
+
+        <RelativeLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.innovation.piazza.Adapters.BackButton
+                android:id="@+id/back_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_arrow_back" />
+
+            <TextView
+                android:id="@+id/toolbar_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:background="#ffffff"
+                android:layout_toRightOf="@+id/back_btn"
+                android:layout_toLeftOf="@+id/cart_button"
+                android:layout_centerVertical="true"/>
+
+            <com.innovation.piazza.Adapters.CartButton
+                android:id="@+id/cart_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/ic_cart" />
+        </RelativeLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+
+</LinearLayout>

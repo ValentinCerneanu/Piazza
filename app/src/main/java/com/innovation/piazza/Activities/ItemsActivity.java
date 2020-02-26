@@ -2,6 +2,7 @@ package com.innovation.piazza.Activities;
 
 import android.os.Bundle;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -38,6 +39,8 @@ public class ItemsActivity extends AppCompatActivity {
     private Category selectedCategory;
 
     private ListView itemsList;
+    private TextView selectedCategoryTextView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +48,9 @@ public class ItemsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_items);
 
         selectedCategory = getIntent().getParcelableExtra(CategoryModel.SELECTED_CATEGORY);
+
+        selectedCategoryTextView = findViewById(R.id.toolbar_text);
+        selectedCategoryTextView.setText(selectedCategory.getName());
 
         getItems();
 
