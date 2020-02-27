@@ -80,6 +80,7 @@ public class ItemsActivity extends AppCompatActivity {
                             try {
                                 JSONObject itemJson = new JSONObject(itemsJson.get(key).toString());
                                 Item item = new Item(  key,
+                                        selectedCategory.getKey(),
                                         itemJson.getString(ItemModel.NAME),
                                         itemJson.getString(ItemModel.DESCRIPTION),
                                         itemJson.getDouble(ItemModel.PRICE),

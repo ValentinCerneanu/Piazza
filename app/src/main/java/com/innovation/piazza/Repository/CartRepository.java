@@ -42,6 +42,9 @@ public class CartRepository {
 
     public void clearCart() {
         itemsInCart.clear();
+
+        if(totalTextView != null)
+            totalTextView.setText("Total: " + getTotalPrice());
     }
 
     public int getQuantity(String key) {

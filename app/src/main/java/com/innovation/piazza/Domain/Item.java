@@ -8,6 +8,7 @@ public class Item {
     private String key;
     private String name;
     private String description;
+    private String categoryKey;
     private Double price;
     private Double gramaj;
     private String picture;
@@ -15,19 +16,9 @@ public class Item {
     private ItemAdapter itemAdapter;
     private int quantity;
 
-    protected Item(Item item) {
-        this.key = item.key;
-        this.name = item.name;
-        this.description = item.description;
-        this.price = item.price;
-        this.gramaj = item.gramaj;
-        this.picture = item.picture;
-        this.itemAdapter = item.itemAdapter;
-        this.quantity = 0;
-    };
-
-    public Item(String key, String name, String description, Double price, Double gramaj, String picture, ItemAdapter itemAdapter) {
+    public Item(String key, String categoryKey, String name, String description, Double price, Double gramaj, String picture, ItemAdapter itemAdapter) {
         this.key = key;
+        this.categoryKey = categoryKey;
         this.name = name;
         this.description = description;
         this.price = price;
@@ -99,5 +90,13 @@ public class Item {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public String getCategoryKey() {
+        return categoryKey;
+    }
+
+    public void setCategoryKey(String categoryKey) {
+        this.categoryKey = categoryKey;
     }
 }
