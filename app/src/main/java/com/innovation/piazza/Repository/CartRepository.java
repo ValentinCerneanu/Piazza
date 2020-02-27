@@ -1,7 +1,10 @@
 package com.innovation.piazza.Repository;
 
+import android.widget.TextView;
+
 import com.innovation.piazza.Domain.Item;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -11,6 +14,7 @@ public class CartRepository {
 
     private String storeKey;
     private HashMap<String, Item> itemsInCart;
+    private TextView totalTextView;
 
     private CartRepository() {
         itemsInCart = new HashMap<>();
@@ -27,6 +31,10 @@ public class CartRepository {
                 itemsInCart.remove(itemInCart.getKey());
             else
                 itemsInCart.put(itemInCart.getKey(), itemInCart);
+
+            if(totalTextView != null)
+                totalTextView.setText("Total: " + getTotalPrice());
+
             return true;
         }
         return false;
@@ -50,13 +58,18 @@ public class CartRepository {
         return itemsInCart;
     }
 
-    public double getTotalPrice() {
+    public String getTotalPrice() {
         Collection<Item> itemInCartsFromRepo = itemsInCart.values();
         ArrayList<Item> itemsInCartArrayList = new ArrayList<>(itemInCartsFromRepo);
         double totalPrice = 0;
         for(Item item : itemsInCartArrayList) {
             totalPrice = totalPrice + item.getQuantity() * item.getPrice();
         }
-        return totalPrice;
+        DecimalFormat decimalFormat = new DecimalFormat("#.##");
+        return decimalFormat.format(totalPrice);
+    }
+
+    public void setTotalTextView(TextView totalTextView) {
+        this.totalTextView = totalTextView;
     }
 }

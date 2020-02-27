@@ -54,6 +54,7 @@ public class CartActivity extends AppCompatActivity {
 
         totalPrice = findViewById(R.id.total_price);
         totalPrice.setText("Total: " + cartRepository.getTotalPrice());
+        cartRepository.setTotalTextView(totalPrice);
 
         itemAdapter = new ItemAdapter(itemsInCart, CartActivity.this, cartRepository.getStoreKey());
         itemsList = findViewById(R.id.items_list);
