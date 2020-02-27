@@ -79,9 +79,31 @@ public class ItemAdapter extends ArrayAdapter<Item> implements ListAdapter {
         viewHolder.minusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int quantity = Integer.parseInt(viewHolder.quantity.getText().toString());
-                if(quantity > 0)
-                    viewHolder.quantity.setText(String.valueOf(--quantity));
+                final int[] quantity = {Integer.parseInt(viewHolder.quantity.getText().toString())};
+                if(quantity[0] > 0) {
+                    if(quantity[0] == 1) {
+                        new AlertDialog.Builder(mContext)
+                                .setTitle("Eliminare produs")
+                                .setMessage("Vrei sa elimini acest produs din cos?")
+
+                                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        viewHolder.quantity.setText(String.valueOf(--quantity[0]));
+                                        CartRepository cartRepository = CartRepository.getInstance();
+                                        selectedItem.setQuantity(quantity[0]);
+                                        cartRepository.addItemInCart(selectedItem, selectedStoreKey);
+                                    }
+                                })
+                                .setNegativeButton(R.string.no, null)
+                                .setIcon(android.R.drawable.ic_dialog_alert)
+                                .show();
+                    } else {
+                        viewHolder.quantity.setText(String.valueOf(--quantity[0]));
+                        CartRepository cartRepository = CartRepository.getInstance();
+                        selectedItem.setQuantity(quantity[0]);
+                        cartRepository.addItemInCart(selectedItem, selectedStoreKey);
+                    }
+                }
             }
         });
 
@@ -100,13 +122,13 @@ public class ItemAdapter extends ArrayAdapter<Item> implements ListAdapter {
                             .setTitle("Produse din alt magazin")
                             .setMessage("Ai in cos produse de la alt magazin! Doresti sa stergi cosul curent si sa incepi unul nou cu acest produs?")
 
-                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
                                     CartRepository.getInstance().clearCart();
                                     CartRepository.getInstance().addItemInCart(selectedItem, selectedStoreKey);
                                 }
                             })
-                            .setNegativeButton(android.R.string.no, null)
+                            .setNegativeButton(R.string.no, null)
                             .setIcon(android.R.drawable.ic_dialog_alert)
                             .show();
                 }

@@ -21,4 +21,8 @@
     <string name="bloc">Bloc</string>
     <string name="apartament">Apartament</string>
     <string name="scara">Scara</string>
+
+    <string name="yes">Da</string>
+    <string name="no">Nu</string>
+
 </resources>

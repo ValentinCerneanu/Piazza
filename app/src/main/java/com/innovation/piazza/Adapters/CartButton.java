@@ -1,6 +1,5 @@
 package com.innovation.piazza.Adapters;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.util.AttributeSet;
@@ -13,12 +12,14 @@ public class CartButton extends ImageButton {
 
     public CartButton(final Context context, AttributeSet attrs) {
         super(context, attrs);
+        if(context instanceof CartActivity)
+            CartButton.super.setEnabled(false);
         super.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent nextActivity;
                 nextActivity = new Intent(context, CartActivity.class);
-                ((Activity) context).startActivity(nextActivity);
+                context.startActivity(nextActivity);
             }
         });
     }

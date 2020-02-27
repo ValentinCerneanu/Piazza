@@ -21,7 +21,10 @@ public class CartRepository {
     public boolean addItemInCart(Item itemInCart, String storeKey) {
         if(storeKey.equals(this.storeKey) || this.storeKey == null) {
             this.storeKey = storeKey;
-            itemsInCart.put(itemInCart.getKey(), itemInCart);
+            if(itemInCart.getQuantity() == 0)
+                itemsInCart.remove(itemInCart.getKey());
+            else
+                itemsInCart.put(itemInCart.getKey(), itemInCart);
             return true;
         }
         return false;
