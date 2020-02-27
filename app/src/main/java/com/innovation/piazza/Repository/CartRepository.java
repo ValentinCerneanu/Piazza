@@ -2,6 +2,8 @@ package com.innovation.piazza.Repository;
 
 import com.innovation.piazza.Domain.Item;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 
 public class CartRepository {
@@ -46,5 +48,15 @@ public class CartRepository {
 
     public HashMap<String, Item> getItemsInCart() {
         return itemsInCart;
+    }
+
+    public double getTotalPrice() {
+        Collection<Item> itemInCartsFromRepo = itemsInCart.values();
+        ArrayList<Item> itemsInCartArrayList = new ArrayList<>(itemInCartsFromRepo);
+        double totalPrice = 0;
+        for(Item item : itemsInCartArrayList) {
+            totalPrice = totalPrice + item.getQuantity() * item.getPrice();
+        }
+        return totalPrice;
     }
 }

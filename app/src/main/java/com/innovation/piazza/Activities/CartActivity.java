@@ -36,20 +36,24 @@ public class CartActivity extends AppCompatActivity {
     private ListView itemsList;
     private TextView cartTextView;
     private Button sentOrderButton;
-    private CartRepository cartRepository;
+    private TextView totalPrice;
 
+    private CartRepository cartRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
 
-        cartTextView = findViewById(R.id.toolbar_text);
-        cartTextView.setText("Shopping Cart");
-
         cartRepository = CartRepository.getInstance();
         Collection<Item> itemInCartsFromRepo = cartRepository.getItemsInCart().values();
         itemsInCart = new ArrayList<>(itemInCartsFromRepo);
+
+        cartTextView = findViewById(R.id.toolbar_text);
+        cartTextView.setText("Shopping Cart");
+
+        totalPrice = findViewById(R.id.total_price);
+        totalPrice.setText("Total: " + cartRepository.getTotalPrice());
 
         itemAdapter = new ItemAdapter(itemsInCart, CartActivity.this, cartRepository.getStoreKey());
         itemsList = findViewById(R.id.items_list);
