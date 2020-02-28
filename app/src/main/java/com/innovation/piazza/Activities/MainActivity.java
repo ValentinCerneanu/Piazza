@@ -192,9 +192,9 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                     case R.id.nav_orders_history: {
-/*                        Intent nextActivity;
-                        nextActivity = new Intent(getBaseContext(), .class);
-                        startActivity(nextActivity);*/
+                        Intent nextActivity;
+                        nextActivity = new Intent(getBaseContext(), OrderHistoryActivity.class);
+                        startActivity(nextActivity);
                         break;
                     }
 

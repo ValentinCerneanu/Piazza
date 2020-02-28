@@ -46,6 +46,10 @@
             android:screenOrientation="portrait">
         </activity>
 
+        <activity android:name=".Activities.OrderHistoryActivity"
+            android:screenOrientation="portrait">
+        </activity>
+
         <activity android:name=".Activities.SignInMethodActivity"
             android:screenOrientation="portrait">
         </activity>

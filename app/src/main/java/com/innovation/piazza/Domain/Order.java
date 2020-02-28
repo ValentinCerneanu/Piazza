@@ -2,6 +2,7 @@ package com.innovation.piazza.Domain;
 
 import com.innovation.piazza.Services.LocationService;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -29,7 +30,23 @@ public class Order {
         this.address = locationService.getAddressLine();
         this.geoLocation.add(locationService.getLatitude());
         this.geoLocation.add(locationService.getLongitude());
-        this.status = OrderModel.STATUS;
+        this.status = OrderModel.STATUS_NEPRELUATA;
+    }
+
+    public Order(String userID, String storeKey, Double totalPrice, String time, String address, String status) {
+        this.userID = userID;
+        this.storeKey = storeKey;
+        this.totalPrice = totalPrice;
+        this.address = address;
+        this.status = status;
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("EE MMM dd HH:mm:ss z yyyy");
+            this.time = dateFormat.parse(time);
+            SimpleDateFormat humanReadableFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm");
+            this.time = humanReadableFormat.parse(time);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     public String getStoreKey() {
