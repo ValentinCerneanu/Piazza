@@ -62,10 +62,11 @@ public class CartActivity extends AppCompatActivity {
 
         sentOrderButton = findViewById(R.id.sent_order_btn);
         cartRepository.setSendOrderButton(sentOrderButton);
+
         if(itemsInCart.isEmpty()) {
             sentOrderButton.setEnabled(false);
         }
-        
+
         sentOrderButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

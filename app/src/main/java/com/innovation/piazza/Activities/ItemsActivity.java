@@ -106,4 +106,10 @@ public class ItemsActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        itemAdapter.notifyDataSetChanged();
+    }
 }
