@@ -33,7 +33,7 @@ public class ItemAdapter extends ArrayAdapter<Item> implements ListAdapter {
         ImageView imagePicture;
         ImageButton minusButton;
         ImageButton plusButton;
-        EditText quantity;
+        TextView quantity;
     }
 
     public ItemAdapter(ArrayList<Item> data, Context context, String selectedStoreKey) {
@@ -58,7 +58,7 @@ public class ItemAdapter extends ArrayAdapter<Item> implements ListAdapter {
             viewHolder.imagePicture = (ImageView) convertView.findViewById(R.id.item_picture);
             viewHolder.minusButton = (ImageButton) convertView.findViewById(R.id.minus_button);
             viewHolder.plusButton = (ImageButton) convertView.findViewById(R.id.plus_button);
-            viewHolder.quantity = (EditText) convertView.findViewById(R.id.quantity);
+            viewHolder.quantity = (TextView) convertView.findViewById(R.id.quantity);
 
             convertView.setTag(viewHolder);
         } else {
