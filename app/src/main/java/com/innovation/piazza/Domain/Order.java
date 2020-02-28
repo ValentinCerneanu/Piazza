@@ -15,6 +15,7 @@ public class Order {
     private String userID;
     private String address;
     private ArrayList<Double> geoLocation = new ArrayList<>();
+    private String status;
 
     public Order(String userID, String storeKey, ArrayList<Item> items, Double totalPrice) {
         this.userID = userID;
@@ -28,6 +29,7 @@ public class Order {
         this.address = locationService.getAddressLine();
         this.geoLocation.add(locationService.getLatitude());
         this.geoLocation.add(locationService.getLongitude());
+        this.status = OrderModel.STATUS;
     }
 
     public String getStoreKey() {
@@ -64,5 +66,9 @@ public class Order {
 
     public ArrayList<Double> getGeoLocation() {
         return geoLocation;
+    }
+
+    public String getStatus() {
+        return status;
     }
 }
