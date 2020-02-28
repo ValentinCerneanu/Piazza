@@ -11,7 +11,7 @@
         android:layout_centerInParent="true"
         android:gravity="center_horizontal"
         android:textSize="30sp"
-        android:text="Bine ati venit!" />
+        android:text="E timpul sa incepi cumparaturile!" />
 
     <TextView
         android:layout_width="match_parent"
@@ -20,5 +20,5 @@
         android:gravity="center_horizontal"
         android:layout_margin="20dp"
         android:textSize="20sp"
-        android:text="Piazza este noul tau serviciu de livrare la domiciliu de cumparaturi!"/>
+        android:text="Apasa pe Next pentru a iti crea un cont"/>
 </RelativeLayout>

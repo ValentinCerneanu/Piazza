@@ -16,7 +16,7 @@ import com.innovation.piazza.Activities.SignInMethodActivity;
 import com.innovation.piazza.R;
 
 public class ScreenSlidePagerActivity extends FragmentActivity {
-    private static final int NUM_PAGES = 5;
+    private static final int NUM_PAGES = 4;
     private ViewPager mPager;
     private PagerAdapter pagerAdapter;
 
@@ -32,7 +32,7 @@ public class ScreenSlidePagerActivity extends FragmentActivity {
         final Button next = (Button) findViewById(R.id.next_slide);
         final Button previous = (Button) findViewById(R.id.previous_slide);
         previous.setVisibility(View.INVISIBLE);
-        
+
         mPager.addOnPageChangeListener(
                 new ViewPager.OnPageChangeListener() {
                     @Override
@@ -103,10 +103,8 @@ public class ScreenSlidePagerActivity extends FragmentActivity {
                     return new HowItWorksPageFragment();
                 case 2:
                     return new AvantagesPageFragment();
-                case 3:
-                    return new Avantages2PageFragment();
                 default:
-                    return new Avantages3PageFragment();
+                    return new ReadyPageFragment();
             }
         }
 

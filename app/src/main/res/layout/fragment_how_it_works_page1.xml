@@ -1,15 +1,24 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/content"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:id="@+id/content"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="horizontal">
 
-    <TextView style="?android:textAppearanceMedium"
-        android:padding="16dp"
-        android:lineSpacingMultiplier="1.2"
+    <TextView
+        android:id="@+id/textview1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="How it works? \n PS:nici noi nu stim\n
-        Pune in cosul virtual produsele pe care le cumperi regulat de la magazinul tau preferat -
-        un shopper iti va ridica comanda din magazin si ti-o va livra la usa in intervalul de timp selectat" />
-</ScrollView>
+        android:layout_centerInParent="true"
+        android:gravity="center_horizontal"
+        android:textSize="30sp"
+        android:text="Cum functioneaza?" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textview1"
+        android:gravity="center_horizontal"
+        android:layout_margin="20dp"
+        android:textSize="20sp"
+        android:text="Pune in cosul virtual produsele pe care vrei sa le cumperi de la magazinul tau preferat si un livrator iti aduce la domiciliu comanda in intervalul de timp selectat!"/>
+</RelativeLayout>
