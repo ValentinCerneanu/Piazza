@@ -36,8 +36,6 @@ public class StoreAdapter extends ArrayAdapter<Store> implements ListAdapter {
         Store dataModel = getItem(position);
         final ViewHolder viewHolder;
 
-        final View result;
-
         if(convertView == null) {
             viewHolder = new ViewHolder();
             LayoutInflater inflater = LayoutInflater.from(getContext());
@@ -46,12 +44,9 @@ public class StoreAdapter extends ArrayAdapter<Store> implements ListAdapter {
             viewHolder.txtAddress = (TextView) convertView.findViewById(R.id.address);
             viewHolder.imageLogo = (ImageView) convertView.findViewById(R.id.storeImage);
 
-            result = convertView;
-
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
-            result = convertView;
         }
 
         viewHolder.txtName.setText(dataModel.getName());

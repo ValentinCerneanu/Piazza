@@ -36,8 +36,6 @@ public class CategoryAdapter extends ArrayAdapter<Category> implements ListAdapt
         Category dataModel = getItem(position);
         final ViewHolder viewHolder;
 
-        final View result;
-
         if(convertView == null) {
             viewHolder = new ViewHolder();
             LayoutInflater inflater = LayoutInflater.from(getContext());
@@ -45,12 +43,9 @@ public class CategoryAdapter extends ArrayAdapter<Category> implements ListAdapt
             viewHolder.txtName = (TextView) convertView.findViewById(R.id.name);
             viewHolder.imagePicture = (ImageView) convertView.findViewById(R.id.picture);
 
-            result = convertView;
-
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
-            result = convertView;
         }
 
         viewHolder.txtName.setText(dataModel.getName());

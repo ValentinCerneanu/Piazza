@@ -48,8 +48,6 @@ public class ItemAdapter extends ArrayAdapter<Item> implements ListAdapter {
         final Item selectedItem = getItem(position);
         final ItemAdapter.ViewHolder viewHolder;
 
-        final View result;
-
         if(convertView == null) {
             viewHolder = new ItemAdapter.ViewHolder();
             LayoutInflater inflater = LayoutInflater.from(getContext());
@@ -62,12 +60,9 @@ public class ItemAdapter extends ArrayAdapter<Item> implements ListAdapter {
             viewHolder.plusButton = (ImageButton) convertView.findViewById(R.id.plus_button);
             viewHolder.quantity = (EditText) convertView.findViewById(R.id.quantity);
 
-            result = convertView;
-
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ItemAdapter.ViewHolder) convertView.getTag();
-            result = convertView;
         }
 
         viewHolder.txtName.setText(selectedItem.getName());
