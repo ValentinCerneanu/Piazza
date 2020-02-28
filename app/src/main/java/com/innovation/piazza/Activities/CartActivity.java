@@ -20,6 +20,7 @@ import com.innovation.piazza.Domain.Item;
 import com.innovation.piazza.Domain.Order;
 import com.innovation.piazza.R;
 import com.innovation.piazza.Repository.CartRepository;
+import com.innovation.piazza.Repository.UserRepository;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -31,7 +32,6 @@ public class CartActivity extends AppCompatActivity {
 
     private ArrayList<Item> itemsInCart = new ArrayList<>();
     private ItemAdapter itemAdapter;
-
 
     private ListView itemsList;
     private TextView cartTextView;
@@ -64,7 +64,7 @@ public class CartActivity extends AppCompatActivity {
         sentOrderButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Order order = new Order(cartRepository.getStoreKey(), itemsInCart, Double.valueOf(cartRepository.getTotalPrice()));
+                Order order = new Order(UserRepository.getInstance().getFirebareUserID(), cartRepository.getStoreKey(), itemsInCart, Double.valueOf(cartRepository.getTotalPrice()));
                 database = FirebaseDatabase.getInstance();
                 myRefToDatabase = database.getReference("Orders");
                 myRefToDatabase.push().setValue(order).addOnSuccessListener( new OnSuccessListener<Void>() {

@@ -131,11 +131,9 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
-
     private void getAddress(){
-        LocationService locationService = new LocationService(this);
-        locationService.getAddressByLocation();
+        LocationService locationService = LocationService.getInstance();
+        locationService.getAddressByLocation(this);
         addressEditText = (EditText) findViewById(R.id.calculated_location);
         addressEditText.setText(locationService.getAddressLine() , TextView.BufferType.EDITABLE);
     }

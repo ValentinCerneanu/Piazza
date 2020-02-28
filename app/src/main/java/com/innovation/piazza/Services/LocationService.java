@@ -8,17 +8,22 @@ import java.util.Locale;
 
 public class LocationService {
     public static final int LOCATION_PERMISSION_CODE = 1;
+    private static final LocationService instance = new LocationService();
 
     private LocationTracker locationTracker;
     private Geocoder geocoder;
     private Address addresses;
 
-    public LocationService(Context context) {
-        geocoder = new Geocoder(context, Locale.getDefault());
-        locationTracker = new LocationTracker(context);
+    private LocationService() {
     }
 
-    public void getAddressByLocation() {      
+    public static LocationService getInstance() {
+        return instance;
+    }
+
+    public void getAddressByLocation(Context context) {
+        geocoder = new Geocoder(context, Locale.getDefault());
+        locationTracker = new LocationTracker(context);
         try {
             addresses = geocoder.getFromLocation(locationTracker.getLatitude(), locationTracker.getLongitude(), 1).get(0);
         } catch (Exception ex) {
@@ -34,5 +39,17 @@ public class LocationService {
         if(addresses != null)
             return addresses.getAddressLine(0);
         return new String();
+    }
+
+    public Geocoder getGeocoder() {
+        return geocoder;
+    }
+
+    public Double getLatitude() {
+        return locationTracker.getLatitude();
+    }
+
+    public Double getLongitude() {
+        return locationTracker.getLongitude();
     }
 }
