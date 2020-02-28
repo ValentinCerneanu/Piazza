@@ -95,4 +95,9 @@ public class CartActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void refreshUI(Item a) {
+        itemsInCart.remove(a);
+        itemAdapter.notifyDataSetChanged();
+    }
 }

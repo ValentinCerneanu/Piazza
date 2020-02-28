@@ -1,5 +1,6 @@
 package com.innovation.piazza.Adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 
+import com.innovation.piazza.Activities.CartActivity;
 import com.innovation.piazza.Domain.Item;
 import com.innovation.piazza.R;
 import com.innovation.piazza.Repository.CartRepository;
@@ -22,7 +24,7 @@ import java.util.ArrayList;
 public class ItemAdapter extends ArrayAdapter<Item> implements ListAdapter {
 
     private ArrayList<Item> dataSet;
-    private Context mContext;
+    private Context context;
     private String selectedStoreKey;
 
     private static class  ViewHolder{
@@ -38,7 +40,7 @@ public class ItemAdapter extends ArrayAdapter<Item> implements ListAdapter {
     public ItemAdapter(ArrayList<Item> data, Context context, String selectedStoreKey) {
         super(context, R.layout.item_adapter, data);
         this.dataSet = data;
-        this.mContext = context;
+        this.context = context;
         this.selectedStoreKey = selectedStoreKey;
     }
 
@@ -76,7 +78,7 @@ public class ItemAdapter extends ArrayAdapter<Item> implements ListAdapter {
                 final int[] quantity = {Integer.parseInt(viewHolder.quantity.getText().toString())};
                 if(quantity[0] > 0) {
                     if(quantity[0] == 1) {
-                        new AlertDialog.Builder(mContext)
+                        new AlertDialog.Builder(context)
                                 .setTitle("Eliminare produs")
                                 .setMessage("Vrei sa elimini acest produs din cos?")
 
@@ -86,6 +88,7 @@ public class ItemAdapter extends ArrayAdapter<Item> implements ListAdapter {
                                         CartRepository cartRepository = CartRepository.getInstance();
                                         selectedItem.setQuantity(quantity[0]);
                                         cartRepository.addItemInCart(selectedItem, selectedStoreKey);
+                                        ((CartActivity) context).refreshUI(selectedItem);
                                     }
                                 })
                                 .setNegativeButton(R.string.no, null)
@@ -112,7 +115,7 @@ public class ItemAdapter extends ArrayAdapter<Item> implements ListAdapter {
                 if(cartRepository.addItemInCart(selectedItem, selectedStoreKey)){
                     //TODO: o animatie pe butonul de cart
                 } else {
-                    new AlertDialog.Builder(mContext)
+                    new AlertDialog.Builder(context)
                             .setTitle("Produse din alt magazin")
                             .setMessage("Ai in cos produse de la alt magazin! Doresti sa stergi cosul curent si sa incepi unul nou cu acest produs?")
 
