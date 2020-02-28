@@ -1,5 +1,6 @@
 package com.innovation.piazza.Repository;
 
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.innovation.piazza.Domain.Item;
@@ -14,7 +15,9 @@ public class CartRepository {
 
     private String storeKey;
     private HashMap<String, Item> itemsInCart;
+
     private TextView totalTextView;
+    private Button sendOrderButton;
 
     private CartRepository() {
         itemsInCart = new HashMap<>();
@@ -32,19 +35,27 @@ public class CartRepository {
             else
                 itemsInCart.put(itemInCart.getKey(), itemInCart);
 
-            if(totalTextView != null)
-                totalTextView.setText("Total: " + getTotalPrice());
+            refreshUI();
 
             return true;
         }
         return false;
     }
 
+    private void refreshUI() {
+        double totalPrice = getTotalPrice();
+        if(totalTextView != null)
+            totalTextView.setText("Total: " + getTotalPriceString());
+        if(sendOrderButton != null)
+            if(totalPrice == 0)
+                sendOrderButton.setEnabled(false);
+            else
+                sendOrderButton.setEnabled(true);
+    }
+
     public void clearCart() {
         itemsInCart.clear();
-
-        if(totalTextView != null)
-            totalTextView.setText("Total: " + getTotalPrice());
+        refreshUI();
     }
 
     public int getQuantity(String key) {
@@ -61,18 +72,26 @@ public class CartRepository {
         return itemsInCart;
     }
 
-    public String getTotalPrice() {
+    public Double getTotalPrice() {
         Collection<Item> itemInCartsFromRepo = itemsInCart.values();
         ArrayList<Item> itemsInCartArrayList = new ArrayList<>(itemInCartsFromRepo);
         double totalPrice = 0;
         for(Item item : itemsInCartArrayList) {
             totalPrice = totalPrice + item.getQuantity() * item.getPrice();
         }
+        return totalPrice;
+    }
+
+    public String getTotalPriceString() {
         DecimalFormat decimalFormat = new DecimalFormat("#.##");
-        return decimalFormat.format(totalPrice);
+        return decimalFormat.format(getTotalPrice());
     }
 
     public void setTotalTextView(TextView totalTextView) {
         this.totalTextView = totalTextView;
+    }
+
+    public void setSendOrderButton(Button sendOrderButton) {
+        this.sendOrderButton = sendOrderButton;
     }
 }

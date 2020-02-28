@@ -53,7 +53,7 @@ public class CartActivity extends AppCompatActivity {
         cartTextView.setText("Shopping Cart");
 
         totalPrice = findViewById(R.id.total_price);
-        totalPrice.setText("Total: " + cartRepository.getTotalPrice());
+        totalPrice.setText("Total: " + cartRepository.getTotalPriceString());
         cartRepository.setTotalTextView(totalPrice);
 
         itemAdapter = new ItemAdapter(itemsInCart, CartActivity.this, cartRepository.getStoreKey());
@@ -61,6 +61,11 @@ public class CartActivity extends AppCompatActivity {
         itemsList.setAdapter(itemAdapter);
 
         sentOrderButton = findViewById(R.id.sent_order_btn);
+        cartRepository.setSendOrderButton(sentOrderButton);
+        if(itemsInCart.isEmpty()) {
+            sentOrderButton.setEnabled(false);
+        }
+        
         sentOrderButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
