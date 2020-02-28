@@ -70,7 +70,7 @@ public class CartActivity extends AppCompatActivity {
         sentOrderButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Order order = new Order(UserRepository.getInstance().getFirebareUserID(), cartRepository.getStoreKey(), itemsInCart, Double.valueOf(cartRepository.getTotalPrice()));
+                Order order = new Order(UserRepository.getInstance().getFirebareUserID(), cartRepository.getStoreKey(), itemsInCart, Double.valueOf(cartRepository.getTotalPriceString()));
                 database = FirebaseDatabase.getInstance();
                 myRefToDatabase = database.getReference("Orders");
                 myRefToDatabase.push().setValue(order).addOnSuccessListener( new OnSuccessListener<Void>() {
