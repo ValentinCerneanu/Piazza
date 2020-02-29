@@ -88,7 +88,9 @@ public class ItemAdapter extends ArrayAdapter<Item> implements ListAdapter {
                                         CartRepository cartRepository = CartRepository.getInstance();
                                         selectedItem.setQuantity(quantity[0]);
                                         cartRepository.addItemInCart(selectedItem, selectedStoreKey);
-                                        ((CartActivity) context).refreshUI(selectedItem);
+                                        if(context instanceof CartActivity) {
+                                            ((CartActivity) context).refreshUI(selectedItem);
+                                        }
                                     }
                                 })
                                 .setNegativeButton(R.string.no, null)
