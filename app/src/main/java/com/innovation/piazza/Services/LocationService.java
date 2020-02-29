@@ -46,10 +46,17 @@ public class LocationService {
     }
 
     public Double getLatitude() {
-        return locationTracker.getLatitude();
+        if(locationTracker != null)
+            return locationTracker.getLatitude();
+        else
+            return new Double(0.0);
     }
 
     public Double getLongitude() {
-        return locationTracker.getLongitude();
+        if(locationTracker != null)
+            return locationTracker.getLongitude();
+        else
+            return new Double(0.0);
     }
+
 }
