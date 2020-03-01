@@ -37,7 +37,7 @@ public class OrderAdapter extends ArrayAdapter<Order> implements ListAdapter {
         Order dataModel = getItem(position);
         final OrderAdapter.ViewHolder viewHolder;
 
-        if(convertView == null) {
+       /* if(convertView == null) {
             viewHolder = new OrderAdapter.ViewHolder();
             LayoutInflater inflater = LayoutInflater.from(getContext());
             convertView = inflater.inflate(R.layout.order_adapter, parent, false);
@@ -57,7 +57,7 @@ public class OrderAdapter extends ArrayAdapter<Order> implements ListAdapter {
         viewHolder.totalPriceTextView.setText("Pret total: " + String.valueOf(dataModel.getTotalPrice()));
         viewHolder.timeTextView.setText("Plasata pe: " + dataModel.getTime());
         viewHolder.addressTextView.setText("Adresa de livrare: " + dataModel.getAddress());
-        viewHolder.statusTextView.setText("Status comanda: " + dataModel.getStatus());
+        viewHolder.statusTextView.setText("Status comanda: " + dataModel.getStatus());*/
 
         return convertView;
     }

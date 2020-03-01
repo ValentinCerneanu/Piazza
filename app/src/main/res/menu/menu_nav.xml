@@ -5,7 +5,7 @@
             <item
                 android:id="@+id/nav_shop_list"
                 android:icon="@drawable/ic_store"
-                android:title="Lista magazine" />
+                android:title="Lista restaurante" />
             <item
                 android:id="@+id/nav_promos"
                 android:icon="@drawable/ic_promos"
@@ -20,11 +20,6 @@
     <item
         android:title="Policies">
         <menu>
-            <item
-                android:id="@+id/nav_return_policy"
-                android:icon="@drawable/ic_policies"
-                android:title="Politica retur" />
-
             <item
                 android:id="@+id/nav_cookie_policy"
                 android:icon="@drawable/ic_policies"

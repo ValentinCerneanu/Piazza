@@ -31,11 +31,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
-import com.innovation.piazza.Adapters.StoreAdapter;
-import com.innovation.piazza.Domain.Store;
-import com.innovation.piazza.Domain.StoreModel;
+import com.innovation.piazza.Adapters.RestaurantAdapter;
+import com.innovation.piazza.Domain.Restaurant;
 import com.innovation.piazza.R;
-import com.innovation.piazza.Services.FirebaseCommunication;
 import com.innovation.piazza.Services.LocationService;
 
 import org.json.JSONException;
@@ -53,9 +51,9 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseDatabase database;
     private DatabaseReference myRefToDatabase;
 
-    private JSONObject storesJson = null;
-    private ArrayList<Store> stores = new ArrayList<>();
-    private StoreAdapter storeAdapter;
+    private JSONObject restaurantsJson = null;
+    private ArrayList<Restaurant> restaurants = new ArrayList<>();
+    private RestaurantAdapter restaurantAdapter;
 
     private ListView storesList;
 
@@ -69,27 +67,27 @@ public class MainActivity extends AppCompatActivity {
 
         getAddress();
 
-        storeAdapter = new StoreAdapter(stores, MainActivity.this);
+        restaurantAdapter = new RestaurantAdapter(restaurants, MainActivity.this);
         storesList = findViewById(R.id.stores_list);
-        storesList.setAdapter(storeAdapter);
+        storesList.setAdapter(restaurantAdapter);
 
         storesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
-                Intent nextActivity;
-                nextActivity = new Intent(getBaseContext(), CategoriesActivity.class);
-                Store selectedStore = (Store) arg0.getItemAtPosition(position);
-                nextActivity.putExtra(StoreModel.SELECTED_STORE, selectedStore);
-                startActivity(nextActivity);
+//                Intent nextActivity;
+//                nextActivity = new Intent(getBaseContext(), CategoriesActivity.class);
+//                Store selectedStore = (Store) arg0.getItemAtPosition(position);
+//                nextActivity.putExtra(StoreModel.SELECTED_STORE, selectedStore);
+//                startActivity(nextActivity);
             }
         });
 
-        getStores();
+        getRestaurants();
     }
 
-    private void getStores() {
+    private void getRestaurants() {
         database = FirebaseDatabase.getInstance();
-        myRefToDatabase = database.getReference("Stores");
+        myRefToDatabase = database.getReference("Restaurants");
         myRefToDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -97,28 +95,25 @@ public class MainActivity extends AppCompatActivity {
                     Gson gson = new Gson();
                     String gsonString = gson.toJson(dataSnapshot.getValue());
                     try {
-                        storesJson = new JSONObject(gsonString);
-                        stores.clear();
-                        Iterator<String> iterator = storesJson.keys();
+                        restaurantsJson = new JSONObject(gsonString);
+                        restaurants.clear();
+                        Iterator<String> iterator = restaurantsJson.keys();
                         while (iterator.hasNext()) {
                             String key = iterator.next();
                             try {
-                                JSONObject storeJson = new JSONObject(storesJson.get(key).toString());
-                                Store store = new Store(  key,
-                                                                    storeJson.getString(StoreModel.NAME),
-                                                                    storeJson.getString(StoreModel.ADDRESS),
-                                                                    storeJson.getString(StoreModel.LOGO_URL),
-                                                                    storeJson.getString(StoreModel.LATITUDE),
-                                                                    storeJson.getString(StoreModel.LONGITUDE),
-                                                                    storeAdapter);
-                                FirebaseCommunication firebaseCommunication = new FirebaseCommunication();
-                                firebaseCommunication.getImageStore(storeJson.getString("logo_url"), store);
-                                stores.add(store);
+                                JSONObject restaurantJson = new JSONObject(restaurantsJson.get(key).toString());
+                                Restaurant restaurant = new Restaurant(  key,
+                                                            restaurantJson.getString("name"),
+                                                            restaurantJson.getString("address"),
+                                                            restaurantJson.getString("discount_value"),
+                                                            restaurantJson.getString("ore_discount")
+                                                                    );
+                                restaurants.add(restaurant);
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
                         }
-                        storeAdapter.notifyDataSetChanged();
+                        restaurantAdapter.notifyDataSetChanged();
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
