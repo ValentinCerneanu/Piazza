@@ -34,11 +34,27 @@
         android:textStyle="bold"
         android:layout_marginLeft="10dp"/>
 
-    <Button
-        android:id="@+id/button_action"
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Rezerva" />
+        android:layout_gravity="center">
+
+        <Button
+            android:id="@+id/book"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="Rezerva" />
+
+        <Button
+            android:id="@+id/walk_in"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Walk in" />
+    </LinearLayout>
+
 
 </LinearLayout>

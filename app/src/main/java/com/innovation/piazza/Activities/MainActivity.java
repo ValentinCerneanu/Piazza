@@ -193,13 +193,6 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     }
 
-                    case R.id.nav_return_policy: {
-/*                        Intent nextActivity;
-                        nextActivity = new Intent(getBaseContext(), .class);
-                        startActivity(nextActivity);*/
-                        break;
-                    }
-
                     case R.id.nav_cookie_policy: {
 /*                        Intent nextActivity;
                         nextActivity = new Intent(getBaseContext(), .class);

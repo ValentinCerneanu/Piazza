@@ -1,6 +1,7 @@
 package com.innovation.piazza.Adapters;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,14 +11,17 @@ import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.innovation.piazza.Activities.CartActivity;
 import com.innovation.piazza.Domain.OrderModel;
 import com.innovation.piazza.Domain.Restaurant;
 import com.innovation.piazza.R;
+import com.innovation.piazza.Repository.CartRepository;
 import com.innovation.piazza.Repository.UserRepository;
 
 import java.util.ArrayList;
@@ -36,6 +40,7 @@ public class RestaurantAdapter extends ArrayAdapter<Restaurant> implements ListA
         TextView discountValue;
         TextView oreDiscout;
         Button rezerva;
+        Button walkIn;
     }
 
     public RestaurantAdapter(ArrayList<Restaurant> data, Context context) {
@@ -57,7 +62,8 @@ public class RestaurantAdapter extends ArrayAdapter<Restaurant> implements ListA
             viewHolder.address = (TextView) convertView.findViewById(R.id.address);
             viewHolder.discountValue = (TextView) convertView.findViewById(R.id.value);
             viewHolder.oreDiscout = (TextView) convertView.findViewById(R.id.ore_discount);
-            viewHolder.rezerva = convertView.findViewById(R.id.button_action);
+            viewHolder.rezerva = convertView.findViewById(R.id.book);
+            viewHolder.walkIn = convertView.findViewById(R.id.walk_in);
 
             convertView.setTag(viewHolder);
         } else {
@@ -86,6 +92,25 @@ public class RestaurantAdapter extends ArrayAdapter<Restaurant> implements ListA
                             public void onFailure(@NonNull Exception e) {
                             }
                         });
+            }
+        });
+
+        viewHolder.walkIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AlertDialog.Builder(mContext)
+                        .setTitle("Scaneaza bonul fiscal")
+                        .setMessage("Nu uita sa scanezi bonul fiscal la final")
+
+                        .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        })
+                        .setNegativeButton(R.string.no, null)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
+            }});
 
                /* myRefToDatabase.child(dataModel.getOrderKey()).child(OrderModel.DELIVERY_KEY)
                         .setValue(UserRepository.getInstance().getFirebareUserID()).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -98,8 +123,6 @@ public class RestaurantAdapter extends ArrayAdapter<Restaurant> implements ListA
                             public void onFailure(@NonNull Exception e) {
                             }
                         });*/
-            }
-        });
 
         return finalConvertView;
     }
